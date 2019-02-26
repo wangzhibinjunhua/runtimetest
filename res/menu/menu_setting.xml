@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/option_testitem"
+        android:title="Test Item"
+        android:showAsAction="never"/>
+    <item
+        android:id="@+id/option_settings"
+        android:title="Settings"
+        android:showAsAction="never"/>
+    <item
+        android:id="@+id/option_debugger"
+        android:title="Debugger"
+        android:showAsAction="never"/>
+
+</menu>
