@@ -41,6 +41,8 @@ public class MainActivity extends BaseActivity{
 			startActivity(intent);
 			break;
 		case R.id.option_settings:
+			intent.setClass(MainActivity.this, SettingActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.option_debugger:
 			break;

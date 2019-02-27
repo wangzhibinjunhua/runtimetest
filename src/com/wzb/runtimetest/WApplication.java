@@ -29,7 +29,7 @@ public class WApplication extends Application {
 	 * SP读写工具.
 	 */
 	public static SharedPreferencesUtil sp;
-	public static SharedPreferencesUtil sp_user;
+	public static SharedPreferencesUtil sp_detail;
 	/**
 	 * 用户信息.
 	 */
@@ -56,13 +56,20 @@ public class WApplication extends Application {
 	 */
 	private final String SP_NAME = "runtimetest";
 
-
+	public final static String[] ITEMNAME={"Reboot","Memory","EMMC","Receiver"
+			,"Battery","Audio","Vibrator","Camera","Video","LCD","GPS"
+			,"BT","WIFI","Light","Proximity","Gravity","Full Battery","ScreenSave"};
+	
+	public final static String[] SPITEM={"reboot_s","memory_s","emmc_s","receiver_s"
+			,"battery_s","audio_s","vibrator_s","camera_s","video_s","lcd_s","gps_s"
+			,"bt_s","wifi_s","light_s","proximity_s","gravity_s","full_battery_s","screensave_s"};
 	@Override
 	public void onCreate() {
 		super.onCreate();
 
 		CONTEXT = getApplicationContext();
 		sp = new SharedPreferencesUtil(SP_NAME, SharedPreferencesUtil.PRIVATE, CONTEXT);
+		sp_detail = new SharedPreferencesUtil("sp_detail", SharedPreferencesUtil.PRIVATE, CONTEXT);
 		LogUtil.openLog(); // 正式发布请注释此程序语句.
 
 	}

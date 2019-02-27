@@ -34,9 +34,7 @@ public class TestItemActivity extends BaseActivity implements OnScrollListener{
 
 	private ListView itemListView = null;
 	
-	public final static String[] SPITEM={"reboot_s","memory_s","emmc_s","receiver_s"
-			,"battery_s","audio_s","vibrator_s","camera_s","video_s","lcd_s","gps_s"
-			,"bt_s","wifi_s","light_s","proximity_s","gravity_s","full_battery_s"};
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,7 @@ public class TestItemActivity extends BaseActivity implements OnScrollListener{
 	}
 	
 	private void updateSp(int id,Boolean v){
-		WApplication.sp.set(SPITEM[id], v);
+		WApplication.sp.set(WApplication.SPITEM[id], v);
 	}
 	
 	private void initView(){

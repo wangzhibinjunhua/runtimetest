@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GLOBAL"
+                android:textSize="22dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="3px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:singleLine="false"
+                android:text="Platform\nMTK"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="isCheckStation"
+                    android:textSize="20sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_ischeckstation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ITEM"
+                android:textSize="22dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="3px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_reboot"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Reboot"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_memory"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Memory"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_emmc"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="EMMC"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_receiver"
+                android:layout_width="match_parent"
+               android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Receiver"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_battery"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Battery"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_audio"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Audio"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_vibrator"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Vibrator"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_Camera"
+                android:layout_width="match_parent"
+               android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Camera"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_video"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Video"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_lcd"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="LCD"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_gps"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="GPS"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_bt"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="BT"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="WIFI"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_light"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Light"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_proximity"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Proximity"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_gravity"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Gravity"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_fullbattery"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="Full Battery"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/setting_screensave"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:text="ScreenSave"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OTHER"
+                android:textSize="22dp" />
+            
+             <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Test with charger"
+                    android:textSize="20sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_testwithcharger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+            </LinearLayout>
+             <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+             
+             <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_setting_base_battery"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Base battery"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_setting_base_battery_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:text="50"
+                    android:textSize="20sp"
+                  />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+            
+                   <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_setting_battery_low_limit"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Battery low limit"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_setting_battery_low_limit_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:text="65"
+                    android:textSize="20sp"
+                  />
+            </LinearLayout>
+            
+                   <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:visibility="visible" />
+                             <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_setting_battery_high_limit"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Battery high limit"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_setting_battery_high_limit_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:text="70"
+                    android:textSize="20sp"
+                  />
+            </LinearLayout>
+            
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
