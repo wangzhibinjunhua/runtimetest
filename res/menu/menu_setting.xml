@@ -10,9 +10,9 @@
         android:id="@+id/option_settings"
         android:title="Settings"
         android:showAsAction="never"/>
-    <item
+    <!--  <item
         android:id="@+id/option_debugger"
         android:title="Debugger"
-        android:showAsAction="never"/>
+        android:showAsAction="never"/> -->
 
 </menu>
