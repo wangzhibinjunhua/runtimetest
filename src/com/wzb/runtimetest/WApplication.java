@@ -30,6 +30,7 @@ public class WApplication extends Application {
 	 */
 	public static SharedPreferencesUtil sp;
 	public static SharedPreferencesUtil sp_detail;
+	public static SharedPreferencesUtil sp_result;
 	/**
 	 * 用户信息.
 	 */
@@ -63,6 +64,15 @@ public class WApplication extends Application {
 	public final static String[] SPITEM={"reboot_s","memory_s","emmc_s","receiver_s"
 			,"battery_s","audio_s","vibrator_s","camera_s","video_s","lcd_s","gps_s"
 			,"bt_s","wifi_s","light_s","proximity_s","gravity_s","full_battery_s","screensave_s"};
+	
+	
+	public final static String[] SPRESULT_S={"reboot_s","memory_s","emmc_s","receiver_s"
+			,"battery_s","audio_s","vibrator_s","camera_s","video_s","lcd_s","gps_s"
+			,"bt_s","wifi_s","light_s","proximity_s","gravity_s","full_battery_s","screensave_s"};
+	
+	public final static String[] SPRESULT_R={"reboot_r","memory_r","emmc_r","receiver_r"
+			,"battery_r","audio_r","vibrator_r","camera_r","video_r","lcd_r","gps_r"
+			,"bt_r","wifi_r","light_r","proximity_r","gravity_r","full_battery_r","screensave_r"};
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -70,6 +80,7 @@ public class WApplication extends Application {
 		CONTEXT = getApplicationContext();
 		sp = new SharedPreferencesUtil(SP_NAME, SharedPreferencesUtil.PRIVATE, CONTEXT);
 		sp_detail = new SharedPreferencesUtil("sp_detail", SharedPreferencesUtil.PRIVATE, CONTEXT);
+		sp_result = new SharedPreferencesUtil("sp_result", SharedPreferencesUtil.PRIVATE, CONTEXT);
 		LogUtil.openLog(); // 正式发布请注释此程序语句.
 
 	}

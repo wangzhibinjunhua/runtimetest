@@ -4,7 +4,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="16"
         android:targetSdkVersion="21" />
     
         <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -77,6 +77,10 @@
               
                
               <activity android:name=".TestResultActivity"
+            android:screenOrientation="portrait"
+            />
+              
+               <activity android:name=".TestResultActivity2"
             android:screenOrientation="portrait"
             />
         
