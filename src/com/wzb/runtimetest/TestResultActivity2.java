@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -35,8 +36,22 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result2);
 		mContext = TestResultActivity2.this;
+		init();
 		initView();
+		
 
+	}
+	
+	private void init(){
+		WApplication.sp.set("runin", "1");
+		start_coreService();
+		
+	}
+	
+	private void start_coreService(){
+		Intent intent=new Intent(mContext,CoreService.class);
+		startService(intent);
+		
 	}
 
 	private void initView() {

@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
 				Intent intent = new Intent();
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.setClass(MainActivity.this, TestResultActivity2.class);
