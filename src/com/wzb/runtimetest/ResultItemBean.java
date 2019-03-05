@@ -8,6 +8,7 @@ public class ResultItemBean {
 	private String item;
 	private String status;
 	private String result;
+	private int color=0; //0:default;1:blue;2:green;3:red
 	
 	public ResultItemBean(){
 		
@@ -36,6 +37,14 @@ public class ResultItemBean {
 	
 	public void setResult(String result){
 		this.result=result;
+	}
+	
+	public void setColor(int c){
+		this.color=c;
+	}
+	
+	public int getColor(){
+		return this.color;
 	}
 
 }

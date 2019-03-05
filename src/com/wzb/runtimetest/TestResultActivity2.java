@@ -3,11 +3,13 @@ package com.wzb.runtimetest;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	private ResultAdapter resultAdapter;
 
 	private ListView resultListView = null;
+	private ResultReceiver mResultReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		registerBr();
 		updateData();
 	}
 	
@@ -103,9 +107,55 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		unregisterBr();
+	}
+	
+	class ResultReceiver extends BroadcastReceiver{
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			final String action=intent.getAction();
+			if(action.equals("custom.android.vibrator")){
+				String status=resultFilter(intent.getStringExtra("status"));
+				String result=resultFilter(intent.getStringExtra("result"));
+				setStatus(3,status,result);
+			}
+		}
+	}
+	
+	private void setStatus(int id,String status,String result){
+		resultAdapter.getResultItem(id).setStatus(status);
+		resultAdapter.getResultItem(id).setResult(result);
+		if(status.equals("testing")){
+			resultAdapter.getResultItem(id).setColor(1);
+		}else if(status.equals("done")){
+			if(result.equals("pass")){
+				resultAdapter.getResultItem(id).setColor(2);
+			}else{
+				resultAdapter.getResultItem(id).setColor(3);
+			}
+		}
+		resultAdapter.notifyDataSetChanged();
+	}
+	
+	private String resultFilter(String str){
+		if(TextUtils.isEmpty(str)){
+			str="None";
+		}
+		return str;
 	}
 	
 	
+	private void registerBr(){
+		IntentFilter filter=new IntentFilter();
+		filter.addAction("custom.android.vibrator");
+		mResultReceiver=new ResultReceiver();
+		registerReceiver(mResultReceiver, filter);
+	}
+	
+	private void unregisterBr(){
+		unregisterReceiver(mResultReceiver);
+	}
 	
 
 	class ResultAdapter extends BaseAdapter {
@@ -154,6 +204,15 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 
 			// convertView.setBackgroundColor(colors[position % 2]);//
 			// 每隔item之间颜色不同
+			//test
+			int backColor=getResultItem(position).getColor();
+			if(backColor==1){
+				convertView.setBackgroundColor(Color.BLUE);
+			}else if(backColor==2){
+				convertView.setBackgroundColor(Color.GREEN);
+			}else if(backColor==3){
+				convertView.setBackgroundColor(Color.RED);
+			}
 			return convertView;
 		}
 
@@ -168,7 +227,8 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			return true;
+			//return true;
+			return super.onKeyDown(keyCode, event);
 		} else {
 			return super.onKeyDown(keyCode, event);
 		}
