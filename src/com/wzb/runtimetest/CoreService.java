@@ -230,6 +230,8 @@ public class CoreService extends Service {
 						intent.putExtra("status", "done");
 						intent.putExtra("result", "pass");
 						sendBroadcast(intent);
+						WApplication.sp_result.set(WApplication.SPRESULT_S[6], "done");
+						WApplication.sp_result.set(WApplication.SPRESULT_R[6], "pass");
 					}
 				}, WApplication.sp_detail.get("vibrator_t", 24) * 1000);
 			} else {
@@ -243,6 +245,7 @@ public class CoreService extends Service {
 			mVibrator.cancel();
 			mVibrator = null;
 		}
+		
 	}
 
 	@Override

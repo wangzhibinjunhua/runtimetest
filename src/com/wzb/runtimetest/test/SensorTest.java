@@ -99,7 +99,7 @@ public class SensorTest extends BaseActivity implements SensorEventListener{
 				WApplication.sp_result.set(WApplication.SPRESULT_S[15], status);
 				WApplication.sp_result.set(WApplication.SPRESULT_R[15], result);
 			}
-			
+			WApplication.sp.set("runin", 2);
 		    SensorTest.this.finish();
 		}
 	};

@@ -87,6 +87,10 @@
                 <activity android:name=".test.SensorTest"
             android:screenOrientation="portrait"
             />
+                
+                  <activity android:name=".test.GpsTest"
+            android:screenOrientation="portrait"
+            />
                
                <service android:name=".CoreService"></service>
         

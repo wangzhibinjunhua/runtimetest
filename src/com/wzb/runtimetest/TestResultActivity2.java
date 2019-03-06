@@ -3,7 +3,7 @@ package com.wzb.runtimetest;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.wzb.runtimetest.test.GpsTest;
 import com.wzb.runtimetest.test.SensorTest;
 import com.wzb.runtimetest.util.LogUtil;
 
@@ -49,21 +49,18 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		
 
 	}
+	//WApplication.sp.set("runin", 1);
+	//runin 1,开始测试,service后台测试 vibrator emmc memory battery
+	//2:测试完sensor
+	//3.gps
+	//4.bt
+	//5.wifi
 	
 	private void init(){
 		WApplication.sp.set("runin", 1);
 		start_coreService();
 		
-		if(WApplication.sp.get("runin",0)==1){
-			mHandler.postDelayed(new  Runnable() {
-				public void run() {
-					Intent intent = new Intent();
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					intent.setClass(mContext, SensorTest.class);
-					startActivity(intent);
-				}
-			}, 5000);
-		}
+		
 	}
 	
 	private void start_coreService(){
@@ -115,6 +112,35 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		LogUtil.logMessage("wzb", "resultactivity onResume");
 		registerBr();
 		updateData();
+		nextTest();
+	}
+	
+	private void nextTest(){
+		int nexttest=WApplication.sp.get("runin",0);
+		if(nexttest==1){//test sensor
+			mHandler.postDelayed(new  Runnable() {
+				public void run() {
+					Intent intent = new Intent();
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.setClass(mContext, SensorTest.class);
+					startActivity(intent);
+				}
+			}, 5000);
+		}else if(nexttest==2){//test gps
+			if(WApplication.sp.get("gps_s", true)){
+				mHandler.postDelayed(new  Runnable() {
+					public void run() {
+						Intent intent = new Intent();
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intent.setClass(mContext, GpsTest.class);
+						startActivity(intent);
+					}
+				}, 1000);
+			}else{
+				WApplication.sp.set("runin", 3);
+				nextTest();
+			}
+		}
 	}
 	
 	private void updateData(){
@@ -156,7 +182,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				 int level = intent.getIntExtra("level", 0);
 				 status="testing";
 				 result=""+level;
-				 //setStatus(4, status, result);
+				 setStatus(4, status, result);
 				 resultAdapter.getResultItem(4).setStatus(status);
 				 resultAdapter.getResultItem(4).setResult(result);
 				 resultAdapter.notifyDataSetChanged();

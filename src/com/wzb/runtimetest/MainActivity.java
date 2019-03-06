@@ -3,7 +3,9 @@ package com.wzb.runtimetest;
 
 import java.io.File;
 import java.text.DecimalFormat;
-import android.annotation.TargetApi;
+
+import com.wzb.runtimetest.test.GpsTest;
+
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
@@ -21,6 +23,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import junit.framework.Test;
 /**
  * @author wzb<wangzhibin_x@qq.com>
  * @date Feb 25, 2019 2:20:52 PM	
@@ -39,6 +42,16 @@ public class MainActivity extends BaseActivity{
 		setContentView(R.layout.activity_main);
 		mContext=MainActivity.this;
 		initView();
+		
+		//test
+		//testtest();
+	}
+	
+	void testtest(){
+		Intent intent = new Intent();
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setClass(MainActivity.this, GpsTest.class);
+		startActivity(intent);
 	}
 	
 	private void initView(){
