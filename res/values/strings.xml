@@ -1,5 +1,7 @@
 <resources>
 
     <string name="app_name">runtimetest</string>
+        <string name="Text_ALSPS_VALUE_CLOSE"> Approaching </string>
+    <string name="Text_ALSPS_VALUE_AWAY"> Away </string>
 
 </resources>

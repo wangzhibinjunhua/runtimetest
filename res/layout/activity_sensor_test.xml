@@ -1,0 +1,144 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"  
+    tools:context="com.example.Test.SensorTest" 
+    android:orientation="vertical">
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
+			<TextView
+				android:id="@+id/Gsensor"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" 
+				android:textSize="25dp" />
+
+			<TextView
+				android:id="@+id/Gsensor_X"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<TextView
+				android:id="@+id/Gsensor_Y"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<TextView
+				android:id="@+id/Gsensor_Z"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+	</LinearLayout>
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
+			<TextView
+			    android:id="@+id/Magnetic"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content" 
+			    android:textSize="25dp" />
+
+			<TextView
+				android:id="@+id/Magnetic_X"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+	</LinearLayout>
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
+			<TextView
+			    android:id="@+id/Gysensor"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content" 
+			    android:textSize="25dp" />
+			<TextView
+				android:id="@+id/Gysensor_X"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<TextView
+				android:id="@+id/Gysensor_Y"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+		    <TextView
+		        android:id="@+id/Gysensor_Z"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" />
+	</LinearLayout>
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
+		<TextView
+		    android:id="@+id/Psensor"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content" 
+		    android:textSize="25dp" />
+
+		<TextView
+			android:id="@+id/Pinfo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<TextView
+			android:id="@+id/Pruselt"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
+		<TextView
+			android:id="@+id/ALsensor"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:textSize="25dp" />
+
+		<TextView
+			android:id="@+id/ALinfo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@+string/als_help_message" />
+		<TextView
+			android:id="@+id/ALruselt"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+    <!-- yangkun add test flag for Agetest start 2017/12/24  -->
+    <RelativeLayout
+        android:id="@+id/sensor_test_result_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/sensor_button_success"
+            android:layout_width="150dip"
+            android:layout_height="60dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bk_true"
+            android:textSize="25dip"
+            android:textColor="#000000"
+            android:text="success" />
+
+        <Button
+            android:id="@+id/sensor_button_fail"
+            android:layout_width="150dip"
+            android:layout_height="60dip"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bk_fail"
+            android:textSize="25dip"
+            android:textColor="#000000"
+            android:text="fail" />
+    </RelativeLayout>
+    <!-- add end  -->
+</LinearLayout>

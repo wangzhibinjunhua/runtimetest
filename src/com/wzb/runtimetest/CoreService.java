@@ -48,7 +48,7 @@ public class CoreService extends Service {
 	}
 
 	private void test_vibrator() {
-		if (!WApplication.sp.get("vibrator_s", false)) {
+		if (!WApplication.sp.get("vibrator_s", true)) {
 			return;
 		}
 		Intent intent = new Intent();

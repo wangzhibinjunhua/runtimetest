@@ -3,12 +3,17 @@ package com.wzb.runtimetest;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import com.wzb.runtimetest.test.SensorTest;
+import com.wzb.runtimetest.util.LogUtil;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -46,9 +51,19 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	}
 	
 	private void init(){
-		WApplication.sp.set("runin", "1");
+		WApplication.sp.set("runin", 1);
 		start_coreService();
 		
+		if(WApplication.sp.get("runin",0)==1){
+			mHandler.postDelayed(new  Runnable() {
+				public void run() {
+					Intent intent = new Intent();
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.setClass(mContext, SensorTest.class);
+					startActivity(intent);
+				}
+			}, 5000);
+		}
 	}
 	
 	private void start_coreService(){
@@ -56,6 +71,12 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		startService(intent);
 		
 	}
+	
+	private Handler mHandler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			
+		};
+	};
 
 	private void initView() {
 		resultListView = (ListView) findViewById(R.id.lv_resultitem);
@@ -91,14 +112,21 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		LogUtil.logMessage("wzb", "resultactivity onResume");
 		registerBr();
 		updateData();
 	}
 	
 	private void updateData(){
+		LogUtil.logMessage("wzb", "updateData");
 		for(int i=0;i<17;i++){
 			resultAdapter.getResultItem(i).setStatus(getStatus(i));
 			resultAdapter.getResultItem(i).setResult(getResult(i));
+			if(getResult(i).equals("pass")){
+				resultAdapter.getResultItem(i).setColor(2);
+			}else if(getResult(i).equals("fail")){
+				resultAdapter.getResultItem(i).setColor(3);
+			}
 		}
 		resultAdapter.notifyDataSetChanged();
 	}
@@ -107,6 +135,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		LogUtil.logMessage("wzb", "resultactivity onPause");
 		unregisterBr();
 	}
 	
@@ -118,7 +147,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 			String status=resultFilter(intent.getStringExtra("status"));
 			String result=resultFilter(intent.getStringExtra("result"));
 			if(action.equals("custom.android.vibrator")){
-				setStatus(3,status,result);
+				setStatus(6,status,result);
 			}else if(action.equals("custom.android.memory")){
 				setStatus(1,status,result);
 			}else if(action.equals("custom.android.emmc")){
@@ -134,6 +163,8 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 			}
 		}
 	}
+	
+	
 	
 	private void setStatus(int id,String status,String result){
 		WApplication.sp_result.set(WApplication.SPRESULT_S[id], status);
@@ -229,6 +260,8 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				convertView.setBackgroundColor(Color.GREEN);
 			}else if(backColor==3){
 				convertView.setBackgroundColor(Color.RED);
+			}else{
+				convertView.setBackgroundColor(Color.WHITE);
 			}
 			return convertView;
 		}
