@@ -123,6 +123,14 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				setStatus(1,status,result);
 			}else if(action.equals("custom.android.emmc")){
 				setStatus(2,status,result);
+			}else if(action.equals(Intent.ACTION_BATTERY_CHANGED)){
+				 int level = intent.getIntExtra("level", 0);
+				 status="testing";
+				 result=""+level;
+				 //setStatus(4, status, result);
+				 resultAdapter.getResultItem(4).setStatus(status);
+				 resultAdapter.getResultItem(4).setResult(result);
+				 resultAdapter.notifyDataSetChanged();
 			}
 		}
 	}
@@ -157,6 +165,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		filter.addAction("custom.android.vibrator");
 		filter.addAction("custom.android.memory");
 		filter.addAction("custom.android.emmc");
+		filter.addAction(Intent.ACTION_BATTERY_CHANGED);
 		mResultReceiver=new ResultReceiver();
 		registerReceiver(mResultReceiver, filter);
 	}

@@ -164,7 +164,7 @@ public class CoreService extends Service {
 				while ((n = inputStream.read(buffer)) != -1) {
 					temp_size += n;
 					fileOutputStream.write(buffer, 0, n);
-					if (temp_size == 1024 * 1024) {
+					if (temp_size == 1024 * 10) {
 						break;
 					}
 				}
@@ -183,7 +183,7 @@ public class CoreService extends Service {
 							//
 							long temp_file_size = temp_file.length();
 							LogUtil.logMessage("wzb", "size=" + temp_file_size);
-							if (temp_file_size == 1048576) {
+							if (temp_file_size == 10240) {
 								emmc_flag = true;
 							}
 							temp_file.delete();
