@@ -115,15 +115,21 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			final String action=intent.getAction();
+			String status=resultFilter(intent.getStringExtra("status"));
+			String result=resultFilter(intent.getStringExtra("result"));
 			if(action.equals("custom.android.vibrator")){
-				String status=resultFilter(intent.getStringExtra("status"));
-				String result=resultFilter(intent.getStringExtra("result"));
 				setStatus(3,status,result);
+			}else if(action.equals("custom.android.memory")){
+				setStatus(1,status,result);
+			}else if(action.equals("custom.android.emmc")){
+				setStatus(2,status,result);
 			}
 		}
 	}
 	
 	private void setStatus(int id,String status,String result){
+		WApplication.sp_result.set(WApplication.SPRESULT_S[id], status);
+		WApplication.sp_result.set(WApplication.SPRESULT_R[id], result);
 		resultAdapter.getResultItem(id).setStatus(status);
 		resultAdapter.getResultItem(id).setResult(result);
 		if(status.equals("testing")){
@@ -149,6 +155,8 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	private void registerBr(){
 		IntentFilter filter=new IntentFilter();
 		filter.addAction("custom.android.vibrator");
+		filter.addAction("custom.android.memory");
+		filter.addAction("custom.android.emmc");
 		mResultReceiver=new ResultReceiver();
 		registerReceiver(mResultReceiver, filter);
 	}

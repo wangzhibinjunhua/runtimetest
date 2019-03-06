@@ -39,7 +39,7 @@ public class WApplication extends Application {
 	 * 文件根目录
 	 */
 	public static final String BASE_FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath()
-			+ "/Health/";
+			+ "/runtimetest/";
 	/**
 	 * 图片文件目录
 	 */
