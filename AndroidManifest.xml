@@ -96,6 +96,10 @@
                   <activity android:name=".test.BtTest"
             android:screenOrientation="portrait"
             />
+                  
+                    <activity android:name=".test.WifiTest"
+            android:screenOrientation="portrait"
+            />
                
                <service android:name=".CoreService"></service>
         
