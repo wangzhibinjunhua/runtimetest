@@ -3,6 +3,7 @@ package com.wzb.runtimetest;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wzb.runtimetest.test.AudioTest;
 import com.wzb.runtimetest.test.BtTest;
 import com.wzb.runtimetest.test.GpsTest;
 import com.wzb.runtimetest.test.LcdTest;
@@ -198,6 +199,20 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				}, 1000);
 			}else{
 				WApplication.sp.set("runin", 7);
+				nextTest();
+			}
+		}else if(nexttest==7){
+			if(WApplication.sp.get("receiver_s", true)){
+				mHandler.postDelayed(new  Runnable() {
+					public void run() {
+						Intent intent = new Intent();
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intent.setClass(mContext, AudioTest.class);
+						startActivity(intent);
+					}
+				}, 1000);
+			}else{
+				WApplication.sp.set("runin", 8);
 				nextTest();
 			}
 		}

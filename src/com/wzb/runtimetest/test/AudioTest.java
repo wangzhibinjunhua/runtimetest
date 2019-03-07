@@ -19,7 +19,7 @@ import android.widget.TextView;
  * @author wzb<wangzhibin_x@qq.com>
  * @date Mar 7, 2019 2:55:10 PM
  */
-public class ReceiverTest extends BaseActivity {
+public class AudioTest extends BaseActivity {
 	
 	private Context mContext;
 	TextView tv_testtime;
@@ -34,16 +34,17 @@ public class ReceiverTest extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_receiver);
-		mContext=ReceiverTest.this;
+		setContentView(R.layout.activity_audio);
+		mContext=AudioTest.this;
 		start_time=System.currentTimeMillis();
-		tv_testtime = (TextView) findViewById(R.id.tv_receiver_testtime);
+		tv_testtime = (TextView) findViewById(R.id.tv_audio_testtime);
 		mAudioManger=(AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
-		setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
-		mAudioManger.setMode(AudioManager.MODE_IN_CALL);
-		mAudioManger.setSpeakerphoneOn(false);
-		mAudioManger.setStreamVolume(AudioManager.STREAM_VOICE_CALL, mAudioManger.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL), AudioManager.FLAG_SHOW_UI);
-		mMediaPlayer = MediaPlayer.create(mContext, R.raw.test_audio);
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		mAudioManger.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManger.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+		mAudioManger.setMode(AudioManager.STREAM_MUSIC);
+		mAudioManger.setSpeakerphoneOn(true);
+		
+		mMediaPlayer = MediaPlayer.create(mContext, R.raw.test_music);
 		mMediaPlayer.setLooping(true);
 		mMediaPlayer.start();
 		
@@ -63,17 +64,17 @@ public class ReceiverTest extends BaseActivity {
 			public void run() {
 				// TODO Auto-generated method stub
 				if(mMediaPlayer.isPlaying()){
-					WApplication.sp_result.set(WApplication.SPRESULT_S[3], "done");
-					WApplication.sp_result.set(WApplication.SPRESULT_R[3], "pass");
+					WApplication.sp_result.set(WApplication.SPRESULT_S[5], "done");
+					WApplication.sp_result.set(WApplication.SPRESULT_R[5], "pass");
 				}else{
-					WApplication.sp_result.set(WApplication.SPRESULT_S[3], "done");
-					WApplication.sp_result.set(WApplication.SPRESULT_R[3], "fail");
+					WApplication.sp_result.set(WApplication.SPRESULT_S[5], "done");
+					WApplication.sp_result.set(WApplication.SPRESULT_R[5], "fail");
 				}
-				WApplication.sp.set("runin", 7);
-				ReceiverTest.this.finish();
+				WApplication.sp.set("runin", 8);
+				AudioTest.this.finish();
 			}
 		};
-		mTimer.schedule(task_finish, WApplication.sp_detail.get("receiver_t", 180)*1000);
+		mTimer.schedule(task_finish, WApplication.sp_detail.get("audio_c", 1)*4*60*1000);
 	}
 
 	private Handler mHandler = new Handler() {
@@ -81,7 +82,7 @@ public class ReceiverTest extends BaseActivity {
 			switch (msg.what) {
 			case 1:
 				test_second=(System.currentTimeMillis()-start_time)/1000;
-				tv_testtime.setText(formatSeconds(test_second));
+				tv_testtime.setText(ReceiverTest.formatSeconds(test_second));
 				break;
 			default:
 				break;
@@ -104,19 +105,6 @@ public class ReceiverTest extends BaseActivity {
 		mTimer.cancel();
 	}
 
-	public static String formatSeconds(long seconds) {
-		String standardTime;
-		if (seconds <= 0) {
-			standardTime = "00:00";
-		} else if (seconds < 60) {
-			standardTime = String.format(Locale.getDefault(), "00:%02d", seconds % 60);
-		} else if (seconds < 3600) {
-			standardTime = String.format(Locale.getDefault(), "%02d:%02d", seconds / 60, seconds % 60);
-		} else {
-			standardTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", seconds / 3600, seconds % 3600 / 60,
-					seconds % 60);
-		}
-		return standardTime;
-	}
+	
 
 }

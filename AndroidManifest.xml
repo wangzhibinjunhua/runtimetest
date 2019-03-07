@@ -108,6 +108,10 @@
                     <activity android:name=".test.ReceiverTest"
             android:screenOrientation="portrait"
             />
+                    
+                     <activity android:name=".test.AudioTest"
+            android:screenOrientation="portrait"
+            />
                
                <service android:name=".CoreService"></service>
         
