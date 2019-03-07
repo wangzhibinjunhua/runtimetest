@@ -4,6 +4,7 @@ package com.wzb.runtimetest;
 import java.io.File;
 import java.text.DecimalFormat;
 
+import com.wzb.runtimetest.test.BtTest;
 import com.wzb.runtimetest.test.GpsTest;
 
 import android.app.ActivityManager;
@@ -50,7 +51,7 @@ public class MainActivity extends BaseActivity{
 	void testtest(){
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setClass(MainActivity.this, GpsTest.class);
+		intent.setClass(MainActivity.this, BtTest.class);
 		startActivity(intent);
 	}
 	
