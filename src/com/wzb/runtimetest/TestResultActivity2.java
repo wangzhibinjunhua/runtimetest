@@ -211,11 +211,11 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 			}else if(action.equals(Intent.ACTION_BATTERY_CHANGED)){
 				 int level = intent.getIntExtra("level", 0);
 				 status="testing";
-				 result=""+level;
+				 result=""+level+"%";
 				 setStatus(4, status, result);
-				 resultAdapter.getResultItem(4).setStatus(status);
-				 resultAdapter.getResultItem(4).setResult(result);
-				 resultAdapter.notifyDataSetChanged();
+				 if(level==100){
+					 setStatus(16, "done", "pass");
+				 }
 			}
 		}
 	}

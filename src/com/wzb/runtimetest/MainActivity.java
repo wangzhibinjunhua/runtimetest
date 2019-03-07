@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import com.wzb.runtimetest.test.BtTest;
 import com.wzb.runtimetest.test.GpsTest;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
@@ -29,7 +30,7 @@ import junit.framework.Test;
  * @author wzb<wangzhibin_x@qq.com>
  * @date Feb 25, 2019 2:20:52 PM	
  */
-public class MainActivity extends BaseActivity{
+public class MainActivity extends Activity{
 	
 	private Context mContext;
 	Button btn_start;
@@ -39,7 +40,7 @@ public class MainActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_main);
 		mContext=MainActivity.this;
 		initView();
