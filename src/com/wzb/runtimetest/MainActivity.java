@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import com.wzb.runtimetest.test.BtTest;
 import com.wzb.runtimetest.test.GpsTest;
 import com.wzb.runtimetest.test.LcdTest;
+import com.wzb.runtimetest.test.ReceiverTest;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -53,7 +54,7 @@ public class MainActivity extends Activity{
 	void testtest(){
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setClass(MainActivity.this, LcdTest.class);
+		intent.setClass(MainActivity.this, ReceiverTest.class);
 		startActivity(intent);
 	}
 	

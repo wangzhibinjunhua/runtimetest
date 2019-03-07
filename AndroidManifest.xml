@@ -104,6 +104,10 @@
                     <activity android:name=".test.LcdTest"
             android:screenOrientation="portrait"
             />
+                      
+                    <activity android:name=".test.ReceiverTest"
+            android:screenOrientation="portrait"
+            />
                
                <service android:name=".CoreService"></service>
         

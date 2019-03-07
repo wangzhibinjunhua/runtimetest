@@ -6,6 +6,7 @@ import java.util.List;
 import com.wzb.runtimetest.test.BtTest;
 import com.wzb.runtimetest.test.GpsTest;
 import com.wzb.runtimetest.test.LcdTest;
+import com.wzb.runtimetest.test.ReceiverTest;
 import com.wzb.runtimetest.test.SensorTest;
 import com.wzb.runtimetest.test.WifiTest;
 import com.wzb.runtimetest.util.LogUtil;
@@ -183,6 +184,20 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				}, 1000);
 			}else{
 				WApplication.sp.set("runin", 6);
+				nextTest();
+			}
+		}else if(nexttest==6){
+			if(WApplication.sp.get("receiver_s", true)){
+				mHandler.postDelayed(new  Runnable() {
+					public void run() {
+						Intent intent = new Intent();
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intent.setClass(mContext, ReceiverTest.class);
+						startActivity(intent);
+					}
+				}, 1000);
+			}else{
+				WApplication.sp.set("runin", 7);
 				nextTest();
 			}
 		}

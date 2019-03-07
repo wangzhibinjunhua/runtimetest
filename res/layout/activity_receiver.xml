@@ -4,15 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+
+    
     <TextView 
-        android:id="@+id/tv_bt"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
+        android:text="Receiver Test"
         android:gravity="center"
-        android:text="BT"
+        android:textSize="24sp"
+        />
+    
+    <TextView 
+        android:id="@+id/tv_receiver_testtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:textSize="22sp"
         />
+  
     
 
 </LinearLayout>
