@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 
 import com.wzb.runtimetest.test.BtTest;
 import com.wzb.runtimetest.test.GpsTest;
+import com.wzb.runtimetest.test.LcdTest;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -52,8 +53,15 @@ public class MainActivity extends Activity{
 	void testtest(){
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setClass(MainActivity.this, BtTest.class);
+		intent.setClass(MainActivity.this, LcdTest.class);
 		startActivity(intent);
+	}
+	
+	private void clearResult(){
+		for(int i=0;i<17;i++){
+			WApplication.sp_result.remove(WApplication.SPRESULT_S[i]);
+			WApplication.sp_result.remove(WApplication.SPRESULT_R[i]);
+		}
 	}
 	
 	private void initView(){
@@ -63,7 +71,7 @@ public class MainActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				clearResult();
 				Intent intent = new Intent();
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.setClass(MainActivity.this, TestResultActivity2.class);
