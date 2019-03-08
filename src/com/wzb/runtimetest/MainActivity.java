@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 
 import com.wzb.runtimetest.test.AudioTest;
 import com.wzb.runtimetest.test.BtTest;
+import com.wzb.runtimetest.test.CameraTest;
 import com.wzb.runtimetest.test.GpsTest;
 import com.wzb.runtimetest.test.LcdTest;
 import com.wzb.runtimetest.test.ReceiverTest;
@@ -55,7 +56,7 @@ public class MainActivity extends Activity{
 	void testtest(){
 		Intent intent = new Intent();
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setClass(MainActivity.this, AudioTest.class);
+		intent.setClass(MainActivity.this, CameraTest.class);
 		startActivity(intent);
 	}
 	

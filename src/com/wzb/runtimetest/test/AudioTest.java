@@ -85,6 +85,7 @@ public class AudioTest extends BaseActivity {
 				tv_testtime.setText(ReceiverTest.formatSeconds(test_second));
 				break;
 			default:
+				super.handleMessage(msg);
 				break;
 			}
 		};

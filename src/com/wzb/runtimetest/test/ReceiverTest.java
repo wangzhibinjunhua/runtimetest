@@ -84,8 +84,10 @@ public class ReceiverTest extends BaseActivity {
 				tv_testtime.setText(formatSeconds(test_second));
 				break;
 			default:
+				super.handleMessage(msg);
 				break;
 			}
+			
 		};
 	};
 	

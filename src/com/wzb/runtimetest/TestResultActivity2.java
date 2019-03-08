@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.wzb.runtimetest.test.AudioTest;
 import com.wzb.runtimetest.test.BtTest;
+import com.wzb.runtimetest.test.CameraTest;
 import com.wzb.runtimetest.test.GpsTest;
 import com.wzb.runtimetest.test.LcdTest;
 import com.wzb.runtimetest.test.ReceiverTest;
@@ -17,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -202,7 +204,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				nextTest();
 			}
 		}else if(nexttest==7){
-			if(WApplication.sp.get("receiver_s", true)){
+			if(WApplication.sp.get("audio_s", true)){
 				mHandler.postDelayed(new  Runnable() {
 					public void run() {
 						Intent intent = new Intent();
@@ -213,6 +215,20 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				}, 1000);
 			}else{
 				WApplication.sp.set("runin", 8);
+				nextTest();
+			}
+		}else if(nexttest==8){
+			if(WApplication.sp.get("camera_s", true)){
+				mHandler.postDelayed(new  Runnable() {
+					public void run() {
+						Intent intent = new Intent();
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intent.setClass(mContext, CameraTest.class);
+						startActivity(intent);
+					}
+				}, 1000);
+			}else{
+				WApplication.sp.set("runin", 9);
 				nextTest();
 			}
 		}

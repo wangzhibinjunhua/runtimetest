@@ -112,6 +112,11 @@
                      <activity android:name=".test.AudioTest"
             android:screenOrientation="portrait"
             />
+                     
+                     
+                     <activity android:name=".test.CameraTest"
+            android:screenOrientation="portrait"
+            />
                
                <service android:name=".CoreService"></service>
         
