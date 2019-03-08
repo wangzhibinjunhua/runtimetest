@@ -6,13 +6,14 @@
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="21" />
-    
-        <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <uses-feature android:name="android.hardware.autofocus" />
-	<uses-feature android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-feature android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -22,18 +23,17 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" >
     </uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>"
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+"
 
     <!-- wlf add start for wifiTest in M -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -53,78 +53,82 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
-           <intent-filter >
-               <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-           </intent-filter>
-            </activity>
-            
-        <activity android:name=".TestItemActivity"
-            android:screenOrientation="portrait"
-            />
- 
-             <activity android:name=".SettingActivity"
-            android:screenOrientation="portrait"
-            />
-             
-              <activity android:name=".SettingItemDetail"
-            android:screenOrientation="portrait"
-            />
-              
-               
-              <activity android:name=".TestResultActivity"
-            android:screenOrientation="portrait"
-            />
-              
-               <activity android:name=".TestResultActivity2"
-            android:screenOrientation="portrait"
-            />
-               
-                <activity android:name=".test.SensorTest"
-            android:screenOrientation="portrait"
-            />
-                
-                  <activity android:name=".test.GpsTest"
-            android:screenOrientation="portrait"
-            />
-                  
-                  
-                  <activity android:name=".test.BtTest"
-            android:screenOrientation="portrait"
-            />
-                  
-                    <activity android:name=".test.WifiTest"
-            android:screenOrientation="portrait"
-            />
-                    
-                    <activity android:name=".test.LcdTest"
-            android:screenOrientation="portrait"
-            />
-                      
-                    <activity android:name=".test.ReceiverTest"
-            android:screenOrientation="portrait"
-            />
-                    
-                     <activity android:name=".test.AudioTest"
-            android:screenOrientation="portrait"
-            />
-                     
-                     
-                     <activity android:name=".test.CameraTest"
-            android:screenOrientation="portrait"
-            />
-                     
-                      
-                     <activity android:name=".test.VideoTest"
-                         android:screenOrientation="landscape"
-            />
-               
-               <service android:name=".CoreService"></service>
-        
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TestItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingItemDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestResultActivity2"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".test.SensorTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.GpsTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.BtTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.WifiTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.LcdTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.ReceiverTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.AudioTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.CameraTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.VideoTest"
+            android:screenOrientation="landscape" />
+
+        <service android:name=".CoreService" >
+        </service>
+
+        <receiver
+            android:name=".CommonReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter android:priority="1001">
+                <action android:name="android.provider.Telephony.SECRET_CODE" />
+
+                <data
+                    android:host="12345"
+                    android:scheme="android_secret_code" />
+            </intent-filter>
+            <intent-filter android:priority="1001">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

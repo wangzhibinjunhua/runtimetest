@@ -75,11 +75,7 @@ public class MainActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				clearResult();
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.setClass(MainActivity.this, TestResultActivity2.class);
-				startActivity(intent);
+				start_test();
 			}
 		});
 		
@@ -91,6 +87,27 @@ public class MainActivity extends Activity{
 		tv_sw_version.setText(android.os.Build.DISPLAY);
 		showRAMSize();
 		showROMInfo();
+	}
+	
+	private void start_test(){
+		clearResult();
+		if(needTestReboot()){
+			
+		}else{
+			gotoResultActivity();
+		}
+		
+	}
+	
+	private Boolean needTestReboot(){
+		return WApplication.sp.get("reboot_s", true);
+	}
+	
+	private void gotoResultActivity(){
+		Intent intent = new Intent();
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setClass(MainActivity.this, TestResultActivity2.class);
+		startActivity(intent);
 	}
 	
 	
