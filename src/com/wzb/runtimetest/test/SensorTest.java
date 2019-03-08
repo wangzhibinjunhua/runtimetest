@@ -247,7 +247,7 @@ public class SensorTest extends BaseActivity implements SensorEventListener{
 			if ( count++ == 20) { //磁场传感器很敏感，每20个变化，显示一次数值
 	            double value = Math.sqrt(event.values[0]*event.values[0] + event.values[1]*event.values[1]
 	                    +event.values[2]*event.values[2]);
-	            String str = String.format("X:%8.4f , Y:%8.4f , Z:%8.4f \n总值为：%8.4f",
+	            String str = String.format("X:%8.4f , Y:%8.4f , Z:%8.4f \ntotal：%8.4f",
 	                    event.values[0],event.values[1],event.values[2],value);             
 	            count = 1;      
 	            Magnetic_Value.setText("GySensor X values is   "+str);

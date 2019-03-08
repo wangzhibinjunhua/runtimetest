@@ -39,9 +39,11 @@ public class ReceiverTest extends BaseActivity {
 		start_time=System.currentTimeMillis();
 		tv_testtime = (TextView) findViewById(R.id.tv_receiver_testtime);
 		mAudioManger=(AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
-		setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
-		mAudioManger.setMode(AudioManager.MODE_IN_CALL);
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		mAudioManger.setMode(AudioManager.MODE_IN_COMMUNICATION);
 		mAudioManger.setSpeakerphoneOn(false);
+		mAudioManger.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManger.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+		setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
 		mAudioManger.setStreamVolume(AudioManager.STREAM_VOICE_CALL, mAudioManger.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL), AudioManager.FLAG_SHOW_UI);
 		mMediaPlayer = MediaPlayer.create(mContext, R.raw.test_audio);
 		mMediaPlayer.setLooping(true);

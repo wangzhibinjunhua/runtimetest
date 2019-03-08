@@ -126,7 +126,7 @@ public class LcdTest extends BaseActivity {
 		};
 	};
 
-	private void setBrightness(Activity activity, int brightness) {
+	public static void setBrightness(Activity activity, int brightness) {
 		WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
 		lp.screenBrightness = Float.valueOf(brightness) * (1f / 255f);
 		activity.getWindow().setAttributes(lp);

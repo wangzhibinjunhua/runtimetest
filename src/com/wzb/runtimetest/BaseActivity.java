@@ -3,8 +3,10 @@ package com.wzb.runtimetest;
 import java.lang.ref.WeakReference;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -38,6 +40,18 @@ public class BaseActivity extends Activity{
 		}
 	}
 	
+	private void hideSystemNavigationBar() {
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
+            View view = this.getWindow().getDecorView();
+            view.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+    }
+	
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
@@ -48,6 +62,7 @@ public class BaseActivity extends Activity{
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		//hideSystemNavigationBar();
 	}
 	
 	@Override

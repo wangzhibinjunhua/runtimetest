@@ -10,6 +10,7 @@ import com.wzb.runtimetest.test.GpsTest;
 import com.wzb.runtimetest.test.LcdTest;
 import com.wzb.runtimetest.test.ReceiverTest;
 import com.wzb.runtimetest.test.SensorTest;
+import com.wzb.runtimetest.test.VideoTest;
 import com.wzb.runtimetest.test.WifiTest;
 import com.wzb.runtimetest.util.LogUtil;
 
@@ -25,6 +26,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager.LayoutParams;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
@@ -53,32 +55,30 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		mContext = TestResultActivity2.this;
 		init();
 		initView();
-		
 
 	}
-	//WApplication.sp.set("runin", 1);
-	//runin 1,开始测试,service后台测试 vibrator emmc memory battery
-	//2:测试完sensor
-	//3.gps
-	//4.bt
-	//5.wifi
-	
-	private void init(){
+	// WApplication.sp.set("runin", 1);
+	// runin 1,开始测试,service后台测试 vibrator emmc memory battery
+	// 2:测试完sensor
+	// 3.gps
+	// 4.bt
+	// 5.wifi
+
+	private void init() {
 		WApplication.sp.set("runin", 1);
 		start_coreService();
-		
-		
+
 	}
-	
-	private void start_coreService(){
-		Intent intent=new Intent(mContext,CoreService.class);
+
+	private void start_coreService() {
+		Intent intent = new Intent(mContext, CoreService.class);
 		startService(intent);
-		
+
 	}
-	
-	private Handler mHandler=new Handler(){
+
+	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			
+
 		};
 	};
 
@@ -89,29 +89,25 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		resultListView.setOnScrollListener(this);
 
 	}
-	
-	private String getStatus(int id){
+
+	private String getStatus(int id) {
 		return WApplication.sp_result.get(WApplication.SPRESULT_S[id], "None");
 	}
-	
-	private String getResult(int id){
+
+	private String getResult(int id) {
 		return WApplication.sp_result.get(WApplication.SPRESULT_R[id], "None");
 	}
 
 	private void initAdapter() {
 		List<ResultItemBean> resultItems = new ArrayList<ResultItemBean>();
-		for(int i=0;i<17;i++){
-			ResultItemBean items=new ResultItemBean(WApplication.ITEMNAME[i],getStatus(i),getResult(i));
+		for (int i = 0; i < 17; i++) {
+			ResultItemBean items = new ResultItemBean(WApplication.ITEMNAME[i], getStatus(i), getResult(i));
 			resultItems.add(items);
 		}
-		
-		resultAdapter=new ResultAdapter(resultItems);
+
+		resultAdapter = new ResultAdapter(resultItems);
 	}
-	
-	
-	
-	
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -121,21 +117,33 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		updateData();
 		nextTest();
 	}
-	
-	private void nextTest(){
-		int nexttest=WApplication.sp.get("runin",0);
-		if(nexttest==1){//test sensor
-			mHandler.postDelayed(new  Runnable() {
+
+	private void nextTest() {
+		int nexttest = WApplication.sp.get("runin", 0);
+		if (nexttest == 1) {// test sensor
+			mHandler.postDelayed(new Runnable() {
 				public void run() {
-					Intent intent = new Intent();
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					intent.setClass(mContext, SensorTest.class);
-					startActivity(intent);
+					if (WApplication.sp.get("light_s", true) || WApplication.sp.get("proximity_s", true)
+							|| WApplication.sp.get("gravity_s", true)) {
+						mHandler.postDelayed(new Runnable() {
+							public void run() {
+								Intent intent = new Intent();
+								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+								intent.setClass(mContext, SensorTest.class);
+								startActivity(intent);
+							}
+						}, 1000);
+
+					} else {
+						WApplication.sp.set("runin", 2);
+						nextTest();
+					}
 				}
 			}, 5000);
-		}else if(nexttest==2){//test gps
-			if(WApplication.sp.get("gps_s", true)){
-				mHandler.postDelayed(new  Runnable() {
+			
+		} else if (nexttest == 2) {// test gps
+			if (WApplication.sp.get("gps_s", true)) {
+				mHandler.postDelayed(new Runnable() {
 					public void run() {
 						Intent intent = new Intent();
 						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -143,13 +151,13 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						startActivity(intent);
 					}
 				}, 1000);
-			}else{
+			} else {
 				WApplication.sp.set("runin", 3);
 				nextTest();
 			}
-		}else if(nexttest==3){//test bt
-			if(WApplication.sp.get("bt_s", true)){
-				mHandler.postDelayed(new  Runnable() {
+		} else if (nexttest == 3) {// test bt
+			if (WApplication.sp.get("bt_s", true)) {
+				mHandler.postDelayed(new Runnable() {
 					public void run() {
 						Intent intent = new Intent();
 						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -157,13 +165,13 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						startActivity(intent);
 					}
 				}, 1000);
-			}else{
+			} else {
 				WApplication.sp.set("runin", 4);
 				nextTest();
 			}
-		}else if(nexttest==4){//test wifi
-			if(WApplication.sp.get("wifi_s", true)){
-				mHandler.postDelayed(new  Runnable() {
+		} else if (nexttest == 4) {// test wifi
+			if (WApplication.sp.get("wifi_s", true)) {
+				mHandler.postDelayed(new Runnable() {
 					public void run() {
 						Intent intent = new Intent();
 						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -171,13 +179,13 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						startActivity(intent);
 					}
 				}, 1000);
-			}else{
+			} else {
 				WApplication.sp.set("runin", 5);
 				nextTest();
 			}
-		}else if(nexttest==5){
-			if(WApplication.sp.get("lcd_s", true)){
-				mHandler.postDelayed(new  Runnable() {
+		} else if (nexttest == 5) {
+			if (WApplication.sp.get("lcd_s", true)) {
+				mHandler.postDelayed(new Runnable() {
 					public void run() {
 						Intent intent = new Intent();
 						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -185,13 +193,13 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						startActivity(intent);
 					}
 				}, 1000);
-			}else{
+			} else {
 				WApplication.sp.set("runin", 6);
 				nextTest();
 			}
-		}else if(nexttest==6){
-			if(WApplication.sp.get("receiver_s", true)){
-				mHandler.postDelayed(new  Runnable() {
+		} else if (nexttest == 6) {
+			if (WApplication.sp.get("receiver_s", true)) {
+				mHandler.postDelayed(new Runnable() {
 					public void run() {
 						Intent intent = new Intent();
 						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -199,13 +207,13 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						startActivity(intent);
 					}
 				}, 1000);
-			}else{
+			} else {
 				WApplication.sp.set("runin", 7);
 				nextTest();
 			}
-		}else if(nexttest==7){
-			if(WApplication.sp.get("audio_s", true)){
-				mHandler.postDelayed(new  Runnable() {
+		} else if (nexttest == 7) {
+			if (WApplication.sp.get("audio_s", true)) {
+				mHandler.postDelayed(new Runnable() {
 					public void run() {
 						Intent intent = new Intent();
 						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -213,13 +221,13 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						startActivity(intent);
 					}
 				}, 1000);
-			}else{
+			} else {
 				WApplication.sp.set("runin", 8);
 				nextTest();
 			}
-		}else if(nexttest==8){
-			if(WApplication.sp.get("camera_s", true)){
-				mHandler.postDelayed(new  Runnable() {
+		} else if (nexttest == 8) {
+			if (WApplication.sp.get("camera_s", true)) {
+				mHandler.postDelayed(new Runnable() {
 					public void run() {
 						Intent intent = new Intent();
 						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -227,27 +235,46 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						startActivity(intent);
 					}
 				}, 1000);
-			}else{
+			} else {
 				WApplication.sp.set("runin", 9);
 				nextTest();
 			}
+		} else if (nexttest == 9) {
+			if (WApplication.sp.get("video_s", true)) {
+				mHandler.postDelayed(new Runnable() {
+					public void run() {
+						Intent intent = new Intent();
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intent.setClass(mContext, VideoTest.class);
+						startActivity(intent);
+					}
+				}, 1000);
+			} else {
+				WApplication.sp.set("runin", 10);
+				testComplete();
+			}
 		}
 	}
-	
-	private void updateData(){
+
+	private void testComplete() {
+		if (WApplication.sp.get("battery_s", true))
+			setStatus(4, "done", "pass");
+	}
+
+	private void updateData() {
 		LogUtil.logMessage("wzb", "updateData");
-		for(int i=0;i<17;i++){
+		for (int i = 0; i < 17; i++) {
 			resultAdapter.getResultItem(i).setStatus(getStatus(i));
 			resultAdapter.getResultItem(i).setResult(getResult(i));
-			if(getResult(i).equals("pass")){
+			if (getResult(i).equals("pass")) {
 				resultAdapter.getResultItem(i).setColor(2);
-			}else if(getResult(i).equals("fail")){
+			} else if (getResult(i).equals("fail")) {
 				resultAdapter.getResultItem(i).setColor(3);
 			}
 		}
 		resultAdapter.notifyDataSetChanged();
 	}
-	
+
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
@@ -255,73 +282,71 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		LogUtil.logMessage("wzb", "resultactivity onPause");
 		unregisterBr();
 	}
-	
-	class ResultReceiver extends BroadcastReceiver{
+
+	class ResultReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
-			final String action=intent.getAction();
-			String status=resultFilter(intent.getStringExtra("status"));
-			String result=resultFilter(intent.getStringExtra("result"));
-			if(action.equals("custom.android.vibrator")){
-				setStatus(6,status,result);
-			}else if(action.equals("custom.android.memory")){
-				setStatus(1,status,result);
-			}else if(action.equals("custom.android.emmc")){
-				setStatus(2,status,result);
-			}else if(action.equals(Intent.ACTION_BATTERY_CHANGED)){
-				 int level = intent.getIntExtra("level", 0);
-				 status="testing";
-				 result=""+level+"%";
-				 setStatus(4, status, result);
-				 if(level==100){
-					 setStatus(16, "done", "pass");
-				 }
+			final String action = intent.getAction();
+			String status = resultFilter(intent.getStringExtra("status"));
+			String result = resultFilter(intent.getStringExtra("result"));
+			if (action.equals("custom.android.vibrator")) {
+				setStatus(6, status, result);
+			} else if (action.equals("custom.android.memory")) {
+				setStatus(1, status, result);
+			} else if (action.equals("custom.android.emmc")) {
+				setStatus(2, status, result);
+			} else if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
+				int level = intent.getIntExtra("level", 0);
+				status = "testing";
+				result = "" + level + "%";
+				if (WApplication.sp.get("battery_s", true))
+					setStatus(4, status, result);
+				if (level == 100) {
+					if (WApplication.sp.get("full_battery_s", true))
+						setStatus(16, "done", "pass");
+				}
 			}
 		}
 	}
-	
-	
-	
-	private void setStatus(int id,String status,String result){
+
+	private void setStatus(int id, String status, String result) {
 		WApplication.sp_result.set(WApplication.SPRESULT_S[id], status);
 		WApplication.sp_result.set(WApplication.SPRESULT_R[id], result);
 		resultAdapter.getResultItem(id).setStatus(status);
 		resultAdapter.getResultItem(id).setResult(result);
-		if(status.equals("testing")){
+		if (status.equals("testing")) {
 			resultAdapter.getResultItem(id).setColor(1);
-		}else if(status.equals("done")){
-			if(result.equals("pass")){
+		} else if (status.equals("done")) {
+			if (result.equals("pass")) {
 				resultAdapter.getResultItem(id).setColor(2);
-			}else{
+			} else {
 				resultAdapter.getResultItem(id).setColor(3);
 			}
 		}
 		resultAdapter.notifyDataSetChanged();
 	}
-	
-	private String resultFilter(String str){
-		if(TextUtils.isEmpty(str)){
-			str="None";
+
+	private String resultFilter(String str) {
+		if (TextUtils.isEmpty(str)) {
+			str = "None";
 		}
 		return str;
 	}
-	
-	
-	private void registerBr(){
-		IntentFilter filter=new IntentFilter();
+
+	private void registerBr() {
+		IntentFilter filter = new IntentFilter();
 		filter.addAction("custom.android.vibrator");
 		filter.addAction("custom.android.memory");
 		filter.addAction("custom.android.emmc");
 		filter.addAction(Intent.ACTION_BATTERY_CHANGED);
-		mResultReceiver=new ResultReceiver();
+		mResultReceiver = new ResultReceiver();
 		registerReceiver(mResultReceiver, filter);
 	}
-	
-	private void unregisterBr(){
+
+	private void unregisterBr() {
 		unregisterReceiver(mResultReceiver);
 	}
-	
 
 	class ResultAdapter extends BaseAdapter {
 
@@ -369,15 +394,15 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 
 			// convertView.setBackgroundColor(colors[position % 2]);//
 			// 每隔item之间颜色不同
-			//test
-			int backColor=getResultItem(position).getColor();
-			if(backColor==1){
+			// test
+			int backColor = getResultItem(position).getColor();
+			if (backColor == 1) {
 				convertView.setBackgroundColor(Color.BLUE);
-			}else if(backColor==2){
+			} else if (backColor == 2) {
 				convertView.setBackgroundColor(Color.GREEN);
-			}else if(backColor==3){
+			} else if (backColor == 3) {
 				convertView.setBackgroundColor(Color.RED);
-			}else{
+			} else {
 				convertView.setBackgroundColor(Color.WHITE);
 			}
 			return convertView;
@@ -388,13 +413,12 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		}
 
 	}
-	
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			//return true;
+			// return true;
 			return super.onKeyDown(keyCode, event);
 		} else {
 			return super.onKeyDown(keyCode, event);
@@ -404,13 +428,13 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
