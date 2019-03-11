@@ -38,6 +38,8 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 	TextView tv_proximity;
 	TextView tv_gravity;
 	TextView tv_fullbattery;
+	TextView tv_backlight;
+	TextView tv_quickcharge;
 	TextView tv_screensave;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +141,14 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 		tv_fullbattery.setClickable(true);
 		tv_fullbattery.setOnClickListener(this);
 		
+		tv_backlight=(TextView)findViewById(R.id.setting_backlight);
+		tv_backlight.setClickable(true);
+		tv_backlight.setOnClickListener(this);
+		
+		tv_quickcharge=(TextView)findViewById(R.id.setting_quickcharge);
+		tv_quickcharge.setClickable(true);
+		tv_quickcharge.setOnClickListener(this);
+		
 		tv_screensave=(TextView)findViewById(R.id.setting_screensave);
 		tv_screensave.setClickable(true);
 		tv_screensave.setOnClickListener(this);
@@ -201,8 +211,14 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 		case R.id.setting_fullbattery:
 			cur_setting_item_detail_id=16;
 			break;
-		case R.id.setting_screensave:
+		case R.id.setting_backlight:
 			cur_setting_item_detail_id=17;
+			break;
+		case R.id.setting_quickcharge:
+			cur_setting_item_detail_id=18;
+			break;
+		case R.id.setting_screensave:
+			cur_setting_item_detail_id=19;
 			break;
 		default:
 			break;

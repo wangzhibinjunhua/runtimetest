@@ -81,7 +81,7 @@ public class SettingItemDetail extends BaseActivity implements OnClickListener{
 	
 	private void updateView(){
 		int id=WApplication.sp.get("cur_setting_item_detail_id", -1);
-		if(id>=0 && id<=17){
+		if(id>=0 && id<=19){
 		tv_setting_item_detail.setText(WApplication.ITEMNAME[id]);
 		cb_setting_item_detail.setChecked(WApplication.sp.get(WApplication.SPITEM[id], true));
 		}
@@ -185,6 +185,13 @@ public class SettingItemDetail extends BaseActivity implements OnClickListener{
 			tv_setting_item_detail_other_value.setText(""+WApplication.sp_detail.get("target_power", 100));
 			break;
 		case 17:
+			tv_setting_item_detail_count.setVisibility(View.VISIBLE);
+			tv_setting_item_detail_count_value.setVisibility(View.VISIBLE);
+			tv_setting_item_detail_count_value.setText(""+WApplication.sp_detail.get("backlight_c", 1300));
+			break;
+		case 18:
+			break;
+		case 19:
 			break;
 		default:
 			break;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wzb.runtimetest.test.AudioTest;
+import com.wzb.runtimetest.test.BacklightTest;
 import com.wzb.runtimetest.test.BtTest;
 import com.wzb.runtimetest.test.CameraTest;
 import com.wzb.runtimetest.test.GpsTest;
@@ -100,7 +101,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 
 	private void initAdapter() {
 		List<ResultItemBean> resultItems = new ArrayList<ResultItemBean>();
-		for (int i = 0; i < 17; i++) {
+		for (int i = 0; i < 19; i++) {
 			ResultItemBean items = new ResultItemBean(WApplication.ITEMNAME[i], getStatus(i), getResult(i));
 			resultItems.add(items);
 		}
@@ -251,6 +252,20 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				}, 1000);
 			} else {
 				WApplication.sp.set("runin", 10);
+				nextTest();
+			}
+		}else if(nexttest==10){
+			if (WApplication.sp.get("backlight_s", true)) {
+				mHandler.postDelayed(new Runnable() {
+					public void run() {
+						Intent intent = new Intent();
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intent.setClass(mContext, BacklightTest.class);
+						startActivity(intent);
+					}
+				}, 1000);
+			} else {
+				WApplication.sp.set("runin", 11);
 				testComplete();
 			}
 		}
@@ -263,7 +278,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 
 	private void updateData() {
 		LogUtil.logMessage("wzb", "updateData");
-		for (int i = 0; i < 17; i++) {
+		for (int i = 0; i < 19; i++) {
 			resultAdapter.getResultItem(i).setStatus(getStatus(i));
 			resultAdapter.getResultItem(i).setResult(getResult(i));
 			if (getResult(i).equals("pass")) {
@@ -298,14 +313,16 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				setStatus(2, status, result);
 			} else if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
 				int level = intent.getIntExtra("level", 0);
+				int v=intent.getIntExtra("voltage", 0);
 				status = "testing";
-				result = "" + level + "%";
+				result = "" + level + "%"+","+v+"v";
 				if (WApplication.sp.get("battery_s", true))
 					setStatus(4, status, result);
 				if (level == 100) {
 					if (WApplication.sp.get("full_battery_s", true))
 						setStatus(16, "done", "pass");
 				}
+				
 			}
 		}
 	}

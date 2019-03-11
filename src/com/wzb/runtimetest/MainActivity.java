@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.PowerManager;
 import android.os.StatFs;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -62,7 +63,7 @@ public class MainActivity extends Activity{
 	}
 	
 	private void clearResult(){
-		for(int i=0;i<17;i++){
+		for(int i=0;i<19;i++){
 			WApplication.sp_result.remove(WApplication.SPRESULT_S[i]);
 			WApplication.sp_result.remove(WApplication.SPRESULT_R[i]);
 		}
@@ -92,7 +93,9 @@ public class MainActivity extends Activity{
 	private void start_test(){
 		clearResult();
 		if(needTestReboot()){
-			
+			WApplication.sp.set("cur_reboot_count", WApplication.sp_detail.get("reboot_c", 3));
+			PowerManager pManager=(PowerManager)mContext.getSystemService(Context.POWER_SERVICE);
+			pManager.reboot("reboot");
 		}else{
 			gotoResultActivity();
 		}
@@ -100,7 +103,8 @@ public class MainActivity extends Activity{
 	}
 	
 	private Boolean needTestReboot(){
-		return WApplication.sp.get("reboot_s", true);
+		//return WApplication.sp.get("reboot_s", true);
+		return false;
 	}
 	
 	private void gotoResultActivity(){

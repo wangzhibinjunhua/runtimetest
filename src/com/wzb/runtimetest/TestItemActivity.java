@@ -103,6 +103,10 @@ public class TestItemActivity extends BaseActivity implements OnScrollListener{
 		testItems.add(item);
 		item = new TestItemBean("Full Battery",WApplication.sp.get("full_battery_s", true));
 		testItems.add(item);
+		item = new TestItemBean("Backlight",WApplication.sp.get("backlight_s", true));
+		testItems.add(item);
+		item = new TestItemBean("QuickCharge",WApplication.sp.get("quickcharge_s", true));
+		testItems.add(item);
 		
 		itemAdapter=new ItemAdapter(testItems);
 	}

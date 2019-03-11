@@ -110,6 +110,9 @@
         <activity
             android:name=".test.VideoTest"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".test.BacklightTest"
+            android:screenOrientation="portrait" />
 
         <service android:name=".CoreService" >
         </service>
