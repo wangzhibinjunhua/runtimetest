@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Run-in"
+        android:text="@string/run_in"
         android:textSize="72sp" />
 
     <View
@@ -26,7 +26,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Test_tplink_v12_20190225"
         android:textSize="20sp" />
     
      <View
@@ -43,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="26sp"
-            android:text="RAM:" />
+            android:text="@string/ram"
+            />"
         
         <TextView
             android:id="@+id/tv_ram_size"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="26sp"
-            android:text="3G" />
+             />
         </LinearLayout>
         
          <LinearLayout
@@ -64,7 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="26sp"
-            android:text="ROM:" />
+            android:text="@string/rom"
+            />
         
         <TextView
             android:id="@+id/tv_rom_size"
@@ -72,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="26sp"
-            android:text="32G" />
+             />
         </LinearLayout>
         
           <LinearLayout
@@ -85,7 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="26sp"
-            android:text="FLAG:" />
+            android:text="@string/flag"
+            />
         
         <TextView
             android:id="@+id/tv_flag_result"
@@ -93,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="26sp"
-            android:text="PASS" />
+             />
         </LinearLayout>
       <View
         android:layout_width="fill_parent"
@@ -105,7 +107,7 @@
           android:layout_width="200dp"
           android:layout_height="wrap_content"
           android:layout_gravity="center_horizontal"
-          android:text="Start"
+          android:text="@string/start"
           android:textSize="42sp"
           />
 

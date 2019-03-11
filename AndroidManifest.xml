@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wzb.runtimetest"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0"
+     >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -71,9 +72,7 @@
         <activity
             android:name=".SettingItemDetail"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".TestResultActivity"
-            android:screenOrientation="portrait" />
+   
         <activity
             android:name=".TestResultActivity2"
             android:screenOrientation="portrait" >

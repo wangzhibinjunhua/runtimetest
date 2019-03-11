@@ -307,7 +307,7 @@ public class SettingItemDetail extends BaseActivity implements OnClickListener{
 								break;
 							case 8:
 								if(count>0 && count<=32){
-									WApplication.sp_detail.set("camera_c", count);
+									WApplication.sp_detail.set("video_c", count);
 									tv_setting_item_detail_count_value.setText(""+count);
 								}
 								break;

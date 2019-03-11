@@ -11,6 +11,7 @@ import com.wzb.runtimetest.test.GpsTest;
 import com.wzb.runtimetest.test.LcdTest;
 import com.wzb.runtimetest.test.ReceiverTest;
 import com.wzb.runtimetest.test.VideoTest;
+import com.wzb.runtimetest.util.LogUtil;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -51,16 +52,8 @@ public class MainActivity extends Activity{
 		mContext=MainActivity.this;
 		initView();
 		
-		//test
-		//testtest();
 	}
 	
-	void testtest(){
-		Intent intent = new Intent();
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setClass(MainActivity.this, VideoTest.class);
-		startActivity(intent);
-	}
 	
 	private void clearResult(){
 		for(int i=0;i<19;i++){
@@ -88,6 +81,19 @@ public class MainActivity extends Activity{
 		tv_sw_version.setText(android.os.Build.DISPLAY);
 		showRAMSize();
 		showROMInfo();
+		showResult();
+	}
+	
+	private void showResult(){
+		int id=0;//Nvram.resultRead();
+		LogUtil.logMessage("wzb", "showResult id="+id);
+		if(id==3){
+			tv_flag.setText("PASS");
+		}else if(id==2){
+			tv_flag.setText("FAIL");
+		}else{
+			tv_flag.setText("None");
+		}
 	}
 	
 	private void start_test(){
@@ -103,8 +109,8 @@ public class MainActivity extends Activity{
 	}
 	
 	private Boolean needTestReboot(){
-		//return WApplication.sp.get("reboot_s", true);
-		return false;
+		return WApplication.sp.get("reboot_s", true);
+		//return false;
 	}
 	
 	private void gotoResultActivity(){

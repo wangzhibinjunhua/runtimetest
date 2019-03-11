@@ -47,6 +47,8 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 
 	private ListView resultListView = null;
 	private ResultReceiver mResultReceiver;
+	
+	TextView tv_result;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +90,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		initAdapter();
 		resultListView.setAdapter(resultAdapter);
 		resultListView.setOnScrollListener(this);
-
+		tv_result=(TextView)findViewById(R.id.result_final_result_value);
 	}
 
 	private String getStatus(int id) {
@@ -272,8 +274,26 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	}
 
 	private void testComplete() {
+		unregisterBr();
 		if (WApplication.sp.get("battery_s", true))
 			setStatus(4, "done", "pass");
+		
+		int final_result=3;//pass
+		for(int i=0;i<19;i++){
+			if(WApplication.sp_result.get(WApplication.SPRESULT_R[i], "").equals("fail")){
+				final_result=2; //fail
+			}
+		}
+		if(final_result==3){
+			tv_result.setText("Pass");
+		}else{
+			tv_result.setText("Fail");
+		}
+		int[] data=new int[]{
+			final_result	
+		};
+		//Nvram.writeFileByNamevec(data);
+		
 	}
 
 	private void updateData() {
@@ -362,7 +382,10 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	}
 
 	private void unregisterBr() {
-		unregisterReceiver(mResultReceiver);
+		if(mResultReceiver!=null){
+			unregisterReceiver(mResultReceiver);
+			mResultReceiver=null;
+		}
 	}
 
 	class ResultAdapter extends BaseAdapter {

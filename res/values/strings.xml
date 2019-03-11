@@ -1,7 +1,49 @@
 <resources>
 
     <string name="app_name">runtimetest</string>
-        <string name="Text_ALSPS_VALUE_CLOSE"> Approaching </string>
+    <string name="Text_ALSPS_VALUE_CLOSE"> Approaching </string>
     <string name="Text_ALSPS_VALUE_AWAY"> Away </string>
-
+    <string name="audio_test">Audio Test</string>
+    <string name="bt">BT</string>
+    <string name="gps">GPS</string>
+    <string name="run_in">Run-in</string>
+    <string name="ram">RAM:</string>
+    <string name="rom">ROM:</string>
+    <string name="flag">FLAG:</string>
+    <string name="start">Start</string>
+    <string name="receiver_test">Receiver Test</string>
+    <string name="status">Status</string>
+    <string name="result">Result</string>
+    <string name="final_result">Final Result:</string>
+    <string name="pass">pass</string>
+    <string name="fail">fail</string>
+    <string name="casename">Case</string>
+<string name="global">GLOBAL</string>
+   <string name="platform">Platform\nMTK</string>
+   <string name="mtk">MTK</string>
+   <string name="ischeckstation">isCheckStation</string>
+   <string name="item">ITEM</string>
+   <string name="reboot">Reboot</string>
+   <string name="memory">Memory</string>
+   <string name="emmc">EMMC</string>
+   <string name="receiver">Receiver</string>
+   <string name="battery">Battery</string>
+   <string name="audio">Audio</string>
+   <string name="video">Video</string>
+   <string name="vibrator">Vibrator</string>
+   <string name="camera">Camera</string>
+   <string name="lcd">LCD</string>
+   <string name="wifi">WIFI</string>
+   <string name="light">Light</string>
+   <string name="proximity">Proximity</string>
+   <string name="gravity">Gravity</string>
+   <string name="full_battery">Full Battery</string>
+   <string name="backlight">Backlight</string>
+   <string name="quickcharge">QuickCharge</string>
+   <string name="screensave">ScreenSave</string>
+   <string name="other">OTHER</string>
+   <string name="test_with_charger">Test with charger</string>
+   <string name="base_battery">Base battery</string>
+   <string name="battery_low_limit">Battery low limit</string>
+   <string name="battery_high_limit">Battery high limit</string>
 </resources>

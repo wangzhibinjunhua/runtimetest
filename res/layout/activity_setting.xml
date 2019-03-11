@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="GLOBAL"
+                android:text="@string/global"
                 android:textSize="22dp" />
 
             <View
@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:singleLine="false"
-                android:text="Platform\nMTK"
+                android:text="@string/platform"
                 android:textSize="20dp" />
 
             <View
@@ -50,7 +50,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="isCheckStation"
+                    android:text="@string/ischeckstation"
                     android:textSize="20sp" />
 
                 <CheckBox
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ITEM"
+                android:text="@string/item"
                 android:textSize="22dp" />
 
             <View
@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Reboot"
+                android:text="@string/reboot"
                 android:textSize="20dp" />
 
             <View
@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Memory"
+                android:text="@string/memory"
                 android:textSize="20dp" />
 
             <View
@@ -112,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="EMMC"
+                android:text="@string/emmc"
                 android:textSize="20dp" />
 
             <View
@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Receiver"
+                android:text="@string/receiver"
                 android:textSize="20dp" />
 
             <View
@@ -140,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Battery"
+                android:text="@string/battery"
                 android:textSize="20dp" />
 
             <View
@@ -154,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Audio"
+                android:text="@string/audio"
                 android:textSize="20dp" />
 
             <View
@@ -168,7 +168,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Vibrator"
+                android:text="@string/vibrator"
                 android:textSize="20dp" />
 
             <View
@@ -182,7 +182,7 @@
                 android:layout_width="match_parent"
                android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Camera"
+                android:text="@string/camera"
                 android:textSize="20dp" />
 
             <View
@@ -196,7 +196,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Video"
+                android:text="@string/video"
                 android:textSize="20dp" />
 
             <View
@@ -210,7 +210,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="LCD"
+                android:text="@string/lcd"
                 android:textSize="20dp" />
 
             <View
@@ -224,7 +224,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="GPS"
+                android:text="@string/gps"
                 android:textSize="20dp" />
 
             <View
@@ -238,7 +238,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="BT"
+                android:text="@string/bt"
                 android:textSize="20dp" />
 
             <View
@@ -252,7 +252,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="WIFI"
+                android:text="@string/wifi"
                 android:textSize="20dp" />
 
             <View
@@ -266,7 +266,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Light"
+                android:text="@string/light"
                 android:textSize="20dp" />
 
             <View
@@ -280,7 +280,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Proximity"
+                android:text="@string/proximity"
                 android:textSize="20dp" />
 
             <View
@@ -294,7 +294,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Gravity"
+                android:text="@string/gravity"
                 android:textSize="20dp" />
 
             <View
@@ -308,7 +308,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Full Battery"
+                android:text="@string/full_battery"
                 android:textSize="20dp" />
 
             <View
@@ -322,7 +322,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="Backlight"
+                android:text="@string/backlight"
                 android:textSize="20dp" />
 
             <View
@@ -335,7 +335,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="QuickCharge"
+                android:text="@string/quickcharge"
                 android:textSize="20dp" />
 
             <View
@@ -349,7 +349,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
-                android:text="ScreenSave"
+                android:text="@string/screensave"
                 android:textSize="20dp" />
 
             <View
@@ -359,7 +359,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="OTHER"
+                android:text="@string/other"
                 android:textSize="22dp" />
             
              <LinearLayout
@@ -371,7 +371,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Test with charger"
+                    android:text="@string/test_with_charger"
                     android:textSize="20sp" />
 
                 <CheckBox
@@ -399,7 +399,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Base battery"
+                    android:text="@string/base_battery"
                     android:textSize="20sp" />
 
                 <TextView
@@ -427,7 +427,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Battery low limit"
+                    android:text="@string/battery_low_limit"
                     android:textSize="20sp" />
 
                 <TextView
@@ -455,7 +455,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Battery high limit"
+                    android:text="@string/battery_high_limit"
                     android:textSize="20sp" />
 
                 <TextView
