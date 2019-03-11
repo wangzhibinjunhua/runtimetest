@@ -75,7 +75,7 @@ public class ReceiverTest extends BaseActivity {
 				ReceiverTest.this.finish();
 			}
 		};
-		mTimer.schedule(task_finish, WApplication.sp_detail.get("receiver_t", 180)*1000);
+		mTimer.schedule(task_finish, WApplication.sp_detail.get("receiver_t", 1800)*1000);
 	}
 
 	private Handler mHandler = new Handler() {

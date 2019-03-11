@@ -1,11 +1,17 @@
 package com.wzb.runtimetest;
 
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
@@ -119,7 +125,7 @@ public class SettingItemDetail extends BaseActivity implements OnClickListener{
 		case 5:
 			tv_setting_item_detail_count.setVisibility(View.VISIBLE);
 			tv_setting_item_detail_count_value.setVisibility(View.VISIBLE);
-			tv_setting_item_detail_count_value.setText(""+WApplication.sp_detail.get("audio_c", 16));
+			tv_setting_item_detail_count_value.setText(""+WApplication.sp_detail.get("audio_c", 11));
 			break;
 		case 6:
 			tv_setting_item_detail_count.setVisibility(View.VISIBLE);
@@ -137,7 +143,7 @@ public class SettingItemDetail extends BaseActivity implements OnClickListener{
 		case 8:
 			tv_setting_item_detail_count.setVisibility(View.VISIBLE);
 			tv_setting_item_detail_count_value.setVisibility(View.VISIBLE);
-			tv_setting_item_detail_count_value.setText(""+WApplication.sp_detail.get("video_c", 34));
+			tv_setting_item_detail_count_value.setText(""+WApplication.sp_detail.get("video_c", 32));
 			break;
 		case 9:
 			tv_setting_item_detail_count.setVisibility(View.VISIBLE);
@@ -201,7 +207,144 @@ public class SettingItemDetail extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		int id=WApplication.sp.get("cur_setting_item_detail_id", -1);
+		switch(v.getId()){
+		case R.id.setting_item_detail_count:
+			if((id==0)||(id==1)||(id==2) || id==5 || (id>=7&&id<=9)|| id==17)editValue(id);
+			break;
+		case R.id.setting_item_detail_time:
+			
+			if(id==3 || id ==6)editValue(id);
+			break;
+		default:
+			break;
+		}
 		
+	}
+	private String hintStr(int id){
+		String hint="";
+		switch(id){
+		case 0:
+			hint="1~60";
+			break;
+		case 1:
+			hint="1~156";
+			break;
+		case 2:
+			hint="1~24";
+			break;
+		case 5:
+			hint="1~11";
+			break;
+		case 7:
+			hint="1~80";
+			break;
+		case 8:
+			hint="1~32";
+			break;
+		case 9:
+			hint="1~1300";
+			break;
+		case 17:
+			hint="1~1300";
+			break;
+		case 3:
+			hint="1~1800";
+			break;
+		case 6:
+			hint="1~2400";
+			break;
+			default:
+				break;
+		}
+		return hint;
+	}
+	
+	private void editValue(final int id) {
+
+		final EditText et = new EditText(this);
+		et.setMaxLines(1);
+		et.setInputType(InputType.TYPE_CLASS_NUMBER);
+		et.setSingleLine(true);
+		et.setHint(hintStr(id));
+		new AlertDialog.Builder(this).setView(et)
+				.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						String input = et.getText().toString();
+						if (!TextUtils.isEmpty(input)) {
+							int count=Integer.parseInt(input);
+							switch(id){
+							case 0:
+								if(count>0 && count<=60){
+									WApplication.sp_detail.set("reboot_c", count);
+									tv_setting_item_detail_count_value.setText(""+count);
+								}
+								break;
+							case 1:
+								if(count>0 && count<=156){
+									WApplication.sp_detail.set("memory_c", count);
+									tv_setting_item_detail_count_value.setText(""+count);
+								}
+								break;
+							case 2:
+								if(count>0 && count<=24){
+									WApplication.sp_detail.set("emmc_c", count);
+									tv_setting_item_detail_count_value.setText(""+count);
+								}
+								break;
+							
+							case 5:
+								if(count>0 && count<=11){
+									WApplication.sp_detail.set("audio_c", count);
+									tv_setting_item_detail_count_value.setText(""+count);
+								}
+								break;
+							case 7:
+								if(count>0 && count<=80){
+									WApplication.sp_detail.set("camera_c", count);
+									tv_setting_item_detail_count_value.setText(""+count);
+								}
+								break;
+							case 8:
+								if(count>0 && count<=32){
+									WApplication.sp_detail.set("camera_c", count);
+									tv_setting_item_detail_count_value.setText(""+count);
+								}
+								break;
+							case 9:
+								if(count>0 && count<=1300){
+									WApplication.sp_detail.set("lcd_c", count);
+									tv_setting_item_detail_count_value.setText(""+count);
+								}
+								break;
+							case 17:
+								if(count>0 && count<=1300){
+									WApplication.sp_detail.set("backlight_c", count);
+									tv_setting_item_detail_count_value.setText(""+count);
+								}
+								break;
+							case 3:
+								if(count>0 && count<=1800){
+									WApplication.sp_detail.set("receiver_t", count);
+									tv_setting_item_detail_time_value.setText(""+count);
+								}
+								break;
+							case 6:
+								if(count>0 && count<=2400){
+									WApplication.sp_detail.set("vibrator_t", count);
+									tv_setting_item_detail_time_value.setText(""+count);
+								}
+								break;
+								default:
+									break;
+							}
+						} else {
+							
+						}
+					}
+				}
+
+				).setCancelable(false).setNegativeButton("cancle", null).show();
 	}
 
 }

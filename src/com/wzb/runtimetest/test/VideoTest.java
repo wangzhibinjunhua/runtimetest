@@ -68,7 +68,7 @@ public class VideoTest extends BaseActivity{
 				VideoTest.this.finish();
 			}
 		};
-		mTimer.schedule(task_finish, WApplication.sp_detail.get("video_c",2)*60*1000);
+		mTimer.schedule(task_finish, WApplication.sp_detail.get("video_c",32)*60*1000);
 	}
 	
 	

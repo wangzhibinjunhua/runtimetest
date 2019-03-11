@@ -233,7 +233,7 @@ public class CoreService extends Service {
 						WApplication.sp_result.set(WApplication.SPRESULT_S[6], "done");
 						WApplication.sp_result.set(WApplication.SPRESULT_R[6], "pass");
 					}
-				}, WApplication.sp_detail.get("vibrator_t", 24) * 1000);
+				}, WApplication.sp_detail.get("vibrator_t", 2400) * 1000);
 			} else {
 				LogUtil.logMessage("wzb", "no vibrator");
 			}

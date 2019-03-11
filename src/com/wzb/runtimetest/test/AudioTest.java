@@ -74,7 +74,7 @@ public class AudioTest extends BaseActivity {
 				AudioTest.this.finish();
 			}
 		};
-		mTimer.schedule(task_finish, WApplication.sp_detail.get("audio_c", 1)*4*60*1000);
+		mTimer.schedule(task_finish, WApplication.sp_detail.get("audio_c", 11)*4*60*1000);
 	}
 
 	private Handler mHandler = new Handler() {

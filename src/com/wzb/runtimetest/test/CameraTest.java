@@ -92,7 +92,7 @@ public class CameraTest extends BaseActivity implements Callback {
 		
 		mTimer.schedule(task_back, 1000);
 		mTimer.schedule(task_front, 4000,3000);
-		long finish_time=WApplication.sp_detail.get("camera_c", 8)*3000+4000;
+		long finish_time=WApplication.sp_detail.get("camera_c", 80)*3000+4000;
 		mTimer.schedule(task_finish, finish_time);
 	}
 

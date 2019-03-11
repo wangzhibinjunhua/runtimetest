@@ -80,7 +80,7 @@ public class LcdTest extends BaseActivity {
 		mTimer.schedule(task_white, 2400,3000);
 		
 		//test time
-		final long test_time=WApplication.sp_detail.get("lcd_c", 13)*3000;
+		final long test_time=(WApplication.sp_detail.get("lcd_c", 1300)/5)*3000;
 		TimerTask task_finish = new TimerTask() {
 
 			@Override
