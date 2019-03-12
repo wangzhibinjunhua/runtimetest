@@ -134,6 +134,8 @@ public class CoreService extends Service {
 		}
 		intent.putExtra("result", result);
 		sendBroadcast(intent);
+		WApplication.sp_result.set(WApplication.SPRESULT_S[1], "done");
+		WApplication.sp_result.set(WApplication.SPRESULT_R[1], result);
 
 	}
 
@@ -211,6 +213,8 @@ public class CoreService extends Service {
 		}
 		intent.putExtra("result", result);
 		sendBroadcast(intent);
+		WApplication.sp_result.set(WApplication.SPRESULT_S[2], "done");
+		WApplication.sp_result.set(WApplication.SPRESULT_R[2], result);
 
 	}
 

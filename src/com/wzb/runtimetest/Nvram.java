@@ -37,10 +37,10 @@ public class Nvram {
 				if(i >= AGETEST_VALUE){
 					String data = "0";
 					int value = testData[i - AGETEST_VALUE];
-					if(value == 1){
-						data = "1";
-					} else if(value == -1){
-						data = "-1";
+					if(value == 3){
+						data = "3";
+					} else if(value == 2){
+						data = "2";
 					}
 					dataArray.add(i, new Byte(data));
 				}else{

@@ -274,7 +274,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		}
 		
 		if(WApplication.sp.get("runin", 0)==11){
-			mHandler.postDelayed(screenTask, 3000);
+			mHandler.postDelayed(screenTask, 5000);
 		}
 	}
 	
@@ -482,7 +482,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			long secondTime = System.currentTimeMillis();
 			if (secondTime - firstTime > 2000) {// 如果两次按键时间间隔大于2秒，则不退出
-				Toast.makeText(this, "Press again to exit", 666).show();
+				Toast.makeText(this, "Press again to exit", Toast.LENGTH_LONG).show();
 				firstTime = secondTime;// 更新firstTime
 				return true;
 			} else {// 两次按键小于2秒时，退出应用

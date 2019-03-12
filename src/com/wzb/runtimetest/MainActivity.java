@@ -5,12 +5,13 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 import com.wzb.runtimetest.util.LogUtil;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
@@ -23,6 +24,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 /**
  * @author wzb<wangzhibin_x@qq.com>
  * @date Feb 25, 2019 2:20:52 PM	
@@ -38,6 +40,9 @@ public class MainActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 		setContentView(R.layout.activity_main);
 		mContext=MainActivity.this;
 		WApplication.activityList.add(this);
@@ -87,9 +92,14 @@ public class MainActivity extends Activity{
 	}
 	
 	private void start_test(){
-		WApplication.sp.set("runin", -1);
+		int battery_level=getBatteryLevel();
+		if(battery_level<50){
+			Toast.makeText(this, "Please charge more than 50%", Toast.LENGTH_LONG).show();
+			return;
+		}
 		clearResult();
 		if(needTestReboot()){
+			WApplication.sp.set("runin", -1);
 			WApplication.sp.set("cur_reboot_count", WApplication.sp_detail.get("reboot_c", 3));
 			PowerManager pManager=(PowerManager)mContext.getSystemService(Context.POWER_SERVICE);
 			pManager.reboot("reboot");
@@ -97,6 +107,15 @@ public class MainActivity extends Activity{
 			gotoResultActivity();
 		}
 		
+	}
+	
+	@SuppressLint("NewApi")
+	private int getBatteryLevel(){
+		int level=0;
+		BatteryManager manager = (BatteryManager) getSystemService(BATTERY_SERVICE);
+		level=manager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+		LogUtil.logMessage("wzb","getBatteryLevel level="+level);
+		return level;
 	}
 	
 	private Boolean needTestReboot(){
