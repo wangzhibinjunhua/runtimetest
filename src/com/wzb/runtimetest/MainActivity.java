@@ -87,6 +87,7 @@ public class MainActivity extends Activity{
 	}
 	
 	private void start_test(){
+		WApplication.sp.set("runin", -1);
 		clearResult();
 		if(needTestReboot()){
 			WApplication.sp.set("cur_reboot_count", WApplication.sp_detail.get("reboot_c", 3));
