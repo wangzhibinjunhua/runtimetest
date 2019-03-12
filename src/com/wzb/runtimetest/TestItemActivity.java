@@ -3,13 +3,12 @@ package com.wzb.runtimetest;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.impl.conn.tsccm.WaitingThread;
-
 import com.wzb.runtimetest.util.LogUtil;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -171,6 +170,17 @@ public class TestItemActivity extends BaseActivity implements OnScrollListener{
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			this.finish();
+			return true;
+		}else{
+			return super.onKeyDown(keyCode, event);
+		}
 	}
 
 }

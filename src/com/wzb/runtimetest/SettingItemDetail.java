@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -345,6 +346,17 @@ public class SettingItemDetail extends BaseActivity implements OnClickListener{
 				}
 
 				).setCancelable(false).setNegativeButton("cancle", null).show();
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			this.finish();
+			return true;
+		}else{
+			return super.onKeyDown(keyCode, event);
+		}
 	}
 
 }

@@ -15,6 +15,7 @@ import com.wzb.runtimetest.test.VideoTest;
 import com.wzb.runtimetest.test.WifiTest;
 import com.wzb.runtimetest.util.LogUtil;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -271,7 +272,25 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				testComplete();
 			}
 		}
+		
+		if(WApplication.sp.get("runin", 0)==11){
+			mHandler.postDelayed(screenTask, 3000);
+		}
 	}
+	
+	private Runnable screenTask=new Runnable() {
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent();
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setClass(TestResultActivity2.this, ScreenSaveActivity.class);
+			startActivity(intent);
+		}
+	};
+	
+	
 
 	private void testComplete() {
 		unregisterBr();
@@ -292,7 +311,8 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		int[] data=new int[]{
 			final_result	
 		};
-		//Nvram.writeFileByNamevec(data);
+		WApplication.sp_result.set("final_result", final_result);
+		Nvram.writeFileByNamevec(data);
 		
 	}
 
@@ -316,6 +336,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		super.onPause();
 		LogUtil.logMessage("wzb", "resultactivity onPause");
 		unregisterBr();
+		mHandler.removeCallbacks(screenTask);
 	}
 
 	class ResultReceiver extends BroadcastReceiver {
@@ -453,17 +474,37 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		}
 
 	}
+	
+	private long firstTime = 0;
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			// return true;
-			return super.onKeyDown(keyCode, event);
+			long secondTime = System.currentTimeMillis();
+			if (secondTime - firstTime > 2000) {// 如果两次按键时间间隔大于2秒，则不退出
+				Toast.makeText(this, "Press again to exit", 666).show();
+				firstTime = secondTime;// 更新firstTime
+				return true;
+			} else {// 两次按键小于2秒时，退出应用
+				exit();
+				return false;
+			}
 		} else {
 			return super.onKeyDown(keyCode, event);
 		}
 	}
+	
+	private void exit() {
+		Intent intent = new Intent(mContext, CoreService.class);
+		stopService(intent);
+		for (Activity activity : WApplication.activityList) {
+			activity.finish();
+		}
+		finish();
+		System.exit(0);
+		System.gc();
+	}
+	
 
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {

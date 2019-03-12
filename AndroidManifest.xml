@@ -2,6 +2,7 @@
     package="com.wzb.runtimetest"
     android:versionCode="1"
     android:versionName="1.0"
+    android:sharedUserId="android.uid.system"
      >
 
     <uses-sdk
@@ -111,6 +112,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".test.BacklightTest"
+            android:screenOrientation="portrait" />
+         <activity
+            android:name=".ScreenSaveActivity"
             android:screenOrientation="portrait" />
 
         <service android:name=".CoreService" >

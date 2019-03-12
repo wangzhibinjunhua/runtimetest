@@ -4,13 +4,6 @@ package com.wzb.runtimetest;
 import java.io.File;
 import java.text.DecimalFormat;
 
-import com.wzb.runtimetest.test.AudioTest;
-import com.wzb.runtimetest.test.BtTest;
-import com.wzb.runtimetest.test.CameraTest;
-import com.wzb.runtimetest.test.GpsTest;
-import com.wzb.runtimetest.test.LcdTest;
-import com.wzb.runtimetest.test.ReceiverTest;
-import com.wzb.runtimetest.test.VideoTest;
 import com.wzb.runtimetest.util.LogUtil;
 
 import android.app.Activity;
@@ -18,7 +11,6 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
@@ -27,12 +19,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import junit.framework.Test;
 /**
  * @author wzb<wangzhibin_x@qq.com>
  * @date Feb 25, 2019 2:20:52 PM	
@@ -50,8 +40,8 @@ public class MainActivity extends Activity{
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_main);
 		mContext=MainActivity.this;
+		WApplication.activityList.add(this);
 		initView();
-		
 	}
 	
 	
@@ -85,7 +75,7 @@ public class MainActivity extends Activity{
 	}
 	
 	private void showResult(){
-		int id=0;//Nvram.resultRead();
+		int id=Nvram.resultRead();
 		LogUtil.logMessage("wzb", "showResult id="+id);
 		if(id==3){
 			tv_flag.setText("PASS");

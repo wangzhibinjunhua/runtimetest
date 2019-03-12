@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -51,6 +52,16 @@ public class BaseActivity extends Activity{
             decorView.setSystemUiVisibility(uiOptions);
         }
     }
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			return true;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+	}
 	
 	@Override
 	protected void onStart() {
