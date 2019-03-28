@@ -18,9 +18,11 @@ import com.android.internal.util.HexDump;
 public class Nvram {
 	
 	private static final String CUSTOM_ADDRESS_FILENAME = "/vendor/nvdata/APCFG/APRDEB/PRODUCT_INFO";
-	private static int AGETEST_VALUE = 380;
+	private static int AGETEST_VALUE = 380; //for runtimetest 
 	private static int TOTAL_BYTE = 1;
 	
+	private static int DETAILMODELOFFSET = 400; //for detailmodel
+	private static int DETAILMODELBYTE = 32; //for detailmodel
 	public static  void writeFileByNamevec(int[] testData){
 		try {
 			INvram agent = INvram.getService(); 
@@ -75,5 +77,48 @@ public class Nvram {
 		}	
 		return final_result;
 	}
+	
+	public static int setDetailModel(){
+		int final_result=0;
+		try {			
+			INvram agent = INvram.getService();			
+			if (agent == null) {				
+				LogUtil.logMessage("cjg_test","readFileByNamevec write agent == null");				
+				return final_result;			
+			}
+			String buff = agent.readFileByName(CUSTOM_ADDRESS_FILENAME, DETAILMODELOFFSET + DETAILMODELBYTE);            
+			LogUtil.logMessage("cjg_test","buff="+buff+",buff len:"+buff.length());
+			byte[] buffArr = HexDump.hexStringToByteArray(buff.substring(0,buff.length() - 1 ));			
+			LogUtil.logMessage("cjg_test","readFileByNamevec read setDetailModel buffArr == "+Arrays.toString(buffArr));
+			String hexdetailModel=buff.substring(buff.length()-64-1,buff.length()-1);
+			LogUtil.logMessage("cjg_test","hexdetailModel="+hexdetailModel);
+			String detailModel=asciiToString(hexdetailModel);
+			LogUtil.logMessage("cjg_test","detailModel="+detailModel);
+			detailModel=detailModel.trim();
+			//set property
+			if(detailModel!=null && detailModel.length()>2){
+				android.os.SystemProperties.set("persist.sys.model.info",detailModel);
+				String ccflag=detailModel.substring(detailModel.length()-2);
+				android.os.SystemProperties.set("persist.radio.countrycode",ccflag);
+			}
+		} catch (Exception e) {
+			LogUtil.logMessage("cjg_test","readFileByNamevec Exception == "+e);			
+			e.printStackTrace();	
+			return -1;
+		}	
+		return final_result;
+	}
+	
+	public static String asciiToString(String value) {
+		StringBuffer sbu = new StringBuffer();
+		String[] chars = new String[value.length() / 2];
+		for (int i = 0; i < chars.length; i++) {
+			chars[i] = value.substring(i * 2, i * 2 + 2);
+			if(chars[i].equals("00"))chars[i]="20";
+			sbu.append((char) Integer.parseInt(chars[i], 16));
+		}
+		return sbu.toString();
+	}
+	
 
 }
