@@ -27,14 +27,14 @@ public class Nvram {
 		try {
 			INvram agent = INvram.getService(); 
 			if (agent == null) {				
-				LogUtil.logMessage("cjg_test","writeFileByNamevec agent == null");				
+				LogUtil.logMessage("wzb","writeFileByNamevec agent == null");				
 				return;
 			}
 			String buff = agent.readFileByName(CUSTOM_ADDRESS_FILENAME, AGETEST_VALUE + TOTAL_BYTE);			
 			byte[] buffArr = HexDump.hexStringToByteArray(buff.substring(0, buff.length() - 1));			
-			LogUtil.logMessage("cjg_test","writeFileByNamevec read buffArr == "+Arrays.toString(buffArr));						
+			LogUtil.logMessage("wzb","writeFileByNamevec read buffArr == "+Arrays.toString(buffArr));						
 			ArrayList<Byte> dataArray = new ArrayList<Byte>(buffArr.length);
-			LogUtil.logMessage("cjg_test","writeFileByNamevec dataArray.size == "+dataArray.size());
+			LogUtil.logMessage("wzb","writeFileByNamevec dataArray.size == "+dataArray.size());
 			for(int i = 0; i < buffArr.length; i++){
 				if(i >= AGETEST_VALUE){
 					String data = "0";
@@ -49,11 +49,11 @@ public class Nvram {
 					dataArray.add(i, buffArr[i]);
 				}
 			}
-			LogUtil.logMessage("cjg_test","writeFileByNamevec dataArray == "+dataArray.toString());						
+			LogUtil.logMessage("wzb","writeFileByNamevec dataArray == "+dataArray.toString());						
 			int flag = agent.writeFileByNamevec(CUSTOM_ADDRESS_FILENAME, AGETEST_VALUE + TOTAL_BYTE, dataArray);			
-			LogUtil.logMessage("cjg_test","ffengfan writeFileByNamevec write flag == "+flag);
+			LogUtil.logMessage("wzb","ffengfan writeFileByNamevec write flag == "+flag);
 		} catch (RemoteException e) {			
-			LogUtil.logMessage("cjg_test","writeFileByNamevec Exception == "+e);			
+			LogUtil.logMessage("wzb","writeFileByNamevec Exception == "+e);			
 			e.printStackTrace();		
 		}
 	}
@@ -67,12 +67,12 @@ public class Nvram {
 			}
 			String buff = agent.readFileByName(CUSTOM_ADDRESS_FILENAME, AGETEST_VALUE + TOTAL_BYTE);            
 			byte[] buffArr = HexDump.hexStringToByteArray(buff.substring(0, buff.length() - 1));			
-			LogUtil.logMessage("cjg_test","readFileByNamevec read buffArr == "+Arrays.toString(buffArr));
+			LogUtil.logMessage("wzb","readFileByNamevec read buffArr == "+Arrays.toString(buffArr));
 			int i = AGETEST_VALUE;
 			final_result = Integer.parseInt(Byte.toString(buffArr[i]));
 		
 		} catch (Exception e) {
-			LogUtil.logMessage("cjg_test","readFileByNamevec Exception == "+e);			
+			LogUtil.logMessage("wzb","readFileByNamevec Exception == "+e);			
 			e.printStackTrace();		
 		}	
 		return final_result;
@@ -83,23 +83,26 @@ public class Nvram {
 		try {			
 			INvram agent = INvram.getService();			
 			if (agent == null) {				
-				LogUtil.logMessage("cjg_test","readFileByNamevec write agent == null");				
+				LogUtil.logMessage("wzb","readFileByNamevec write agent == null");				
 				return final_result;			
 			}
 			String buff = agent.readFileByName(CUSTOM_ADDRESS_FILENAME, DETAILMODELOFFSET + DETAILMODELBYTE);            
-			LogUtil.logMessage("cjg_test","buff="+buff+",buff len:"+buff.length());
+			LogUtil.logMessage("wzb","buff="+buff+",buff len:"+buff.length());
 			byte[] buffArr = HexDump.hexStringToByteArray(buff.substring(0,buff.length() - 1 ));			
-			LogUtil.logMessage("cjg_test","readFileByNamevec read setDetailModel buffArr == "+Arrays.toString(buffArr));
+			LogUtil.logMessage("wzb","readFileByNamevec read setDetailModel buffArr == "+Arrays.toString(buffArr));
 			String hexdetailModel=buff.substring(buff.length()-64-1,buff.length()-1);
-			LogUtil.logMessage("cjg_test","hexdetailModel="+hexdetailModel);
+			LogUtil.logMessage("wzb","hexdetailModel="+hexdetailModel);
 			String detailModel=asciiToString(hexdetailModel);
-			LogUtil.logMessage("cjg_test","detailModel="+detailModel);
+			LogUtil.logMessage("wzb","detailModel="+detailModel);
 			detailModel=detailModel.trim();
 			//set property
 			if(detailModel!=null && detailModel.length()>2){
 				android.os.SystemProperties.set("persist.sys.model.info",detailModel);
 				String ccflag=detailModel.substring(detailModel.length()-2);
 				android.os.SystemProperties.set("persist.radio.countrycode",ccflag);
+			}else{
+				android.os.SystemProperties.set("persist.sys.model.info","");
+				android.os.SystemProperties.set("persist.radio.countrycode","");
 			}
 		} catch (Exception e) {
 			LogUtil.logMessage("cjg_test","readFileByNamevec Exception == "+e);			

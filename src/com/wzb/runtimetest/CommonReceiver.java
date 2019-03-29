@@ -22,7 +22,18 @@ public class CommonReceiver extends BroadcastReceiver {
 		// TODO Auto-generated method stub
 		final String action = intent.getAction();
 		LogUtil.logMessage("wzb", "CommonReceiver:" + action);
-		if (action.equals("android.provider.Telephony.SECRET_CODE")) {
+		if(action.equals("android.intent.action.PRE_BOOT_COMPLETED")){
+			//set ccflag property
+			if("1".equals(android.os.SystemProperties.get("ro.custom.set_detailmodel_tp",""))){
+				if(Nvram.setDetailModel()==0){
+					LogUtil.logMessage("wzb", "CommonReceiver set ccflag property ok");
+				}else{
+					LogUtil.logMessage("wzb", "CommonReceiver set ccflag property err");
+				}
+			}
+			
+		}
+		else if (action.equals("android.provider.Telephony.SECRET_CODE")) {
 			Uri uri = intent.getData();
 			if (uri.equals(runtimetest)) {
 				Intent mintent = new Intent();
@@ -31,17 +42,7 @@ public class CommonReceiver extends BroadcastReceiver {
 				context.startActivity(mintent);
 			}
 		} else if (action.equals("android.intent.action.BOOT_COMPLETED")) {
-			//set ccflag property
-			String ccflag=android.os.SystemProperties.get("persist.radio.countrycode","");
-			if(TextUtils.isEmpty(ccflag)){
-				if(Nvram.setDetailModel()==0){
-					LogUtil.logMessage("wzb", "set ccflag property ok");
-				}else{
-					LogUtil.logMessage("wzb", "set ccflag property err");
-				}
-			}
-			
-			
+
 			if (WApplication.sp.get("runin", 0) == -1) {
 				int cur_reboot_count = WApplication.sp.get("cur_reboot_count", 0);
 				if (cur_reboot_count > 1) {

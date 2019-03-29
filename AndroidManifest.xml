@@ -64,6 +64,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name=".TestItemActivity"
             android:screenOrientation="portrait" />
@@ -134,6 +135,10 @@
             <intent-filter android:priority="1001">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
+             <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED" />
+            </intent-filter>
+            
         </receiver>
     </application>
 
