@@ -100,7 +100,7 @@ public class MainActivity extends Activity{
 		clearResult();
 		if(needTestReboot()){
 			WApplication.sp.set("runin", -1);
-			WApplication.sp.set("cur_reboot_count", WApplication.sp_detail.get("reboot_c", 3));
+			WApplication.sp.set("cur_reboot_count", WApplication.sp_detail.get("reboot_c", 60));
 			PowerManager pManager=(PowerManager)mContext.getSystemService(Context.POWER_SERVICE);
 			pManager.reboot("reboot");
 		}else{

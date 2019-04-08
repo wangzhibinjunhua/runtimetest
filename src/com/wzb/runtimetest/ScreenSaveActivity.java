@@ -5,8 +5,10 @@ import java.util.TimerTask;
 
 import com.wzb.runtimetest.util.LogUtil;
 
+import android.app.usage.UsageEvents.Event;
 import android.os.Bundle;
 import android.os.Handler;
+
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -150,9 +152,13 @@ public class ScreenSaveActivity extends BaseActivity {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
-		ScreenSaveActivity.this.finish();
+		if(event.getAction()==MotionEvent.ACTION_UP){
+			LogUtil.logMessage("wzb", "onTouchEvent ACTION_UP");
+			ScreenSaveActivity.this.finish();
+		}
 		return super.onTouchEvent(event);
 	}
+	
 
 	@Override
 	protected void onDestroy() {
@@ -160,5 +166,7 @@ public class ScreenSaveActivity extends BaseActivity {
 		super.onDestroy();
 		mTimer.cancel();
 	}
+
+
 
 }

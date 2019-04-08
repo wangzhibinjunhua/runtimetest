@@ -120,6 +120,8 @@
 
         <service android:name=".CoreService" >
         </service>
+        <service android:name=".CoreIntentService" >
+        </service>
 
         <receiver
             android:name=".CommonReceiver"

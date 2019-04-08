@@ -70,13 +70,24 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 
 	private void init() {
 		WApplication.sp.set("runin", 1);
+		WApplication.sp_result.set("final_result", 0);
 		start_coreService();
 
 	}
 
 	private void start_coreService() {
+		
 		Intent intent = new Intent(mContext, CoreService.class);
 		startService(intent);
+		
+
+		Intent intent2 = new Intent(mContext, CoreIntentService.class);
+		intent2.putExtra("key", 2);
+		startService(intent2);
+		
+		Intent intent3 = new Intent(mContext, CoreIntentService.class);
+		intent3.putExtra("key", 3);
+		startService(intent3);
 
 	}
 
@@ -273,8 +284,11 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 			}
 		}
 		
-		if(WApplication.sp.get("runin", 0)==11){
-			mHandler.postDelayed(screenTask, 5000);
+		if(nexttest==11){
+			int finalresult=WApplication.sp_result.get("final_result", 0);
+			if(finalresult==2 ||finalresult==3){
+				mHandler.postDelayed(screenTask, 5000);
+			}
 		}
 	}
 	
@@ -293,9 +307,38 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	
 
 	private void testComplete() {
-		unregisterBr();
+		//unregisterBr();
+		//check 后台测试的emmc memory vibrator
+		if (WApplication.sp.get("memory_s", true)){
+			if(WApplication.sp_result.get(WApplication.SPRESULT_S[1], "none").equals("testing")){
+				return;
+			}
+		}
+		if (WApplication.sp.get("emmc_s", true)){
+			if(WApplication.sp_result.get(WApplication.SPRESULT_S[2], "none").equals("testing")){
+				return;
+			}
+		}
+		if (WApplication.sp.get("vibrator_s", true)){
+			if(WApplication.sp_result.get(WApplication.SPRESULT_S[6], "none").equals("testing")){
+				return;
+			}
+		}
+		
 		if (WApplication.sp.get("battery_s", true))
 			setStatus(4, "done", "pass");
+		
+		//check full battery "not Charging"
+		if (WApplication.sp.get("full_battery_s", true)){
+			if(!WApplication.sp_result.get(WApplication.SPRESULT_S[16], "none").equals("done")){
+				if(WApplication.sp_result.get(WApplication.SPRESULT_R[16], "none").equals("not Charging")){
+					setStatus(16, "done", "fail");
+				}else{
+					return;
+				}
+			}
+			
+		}
 		
 		int final_result=3;//pass
 		for(int i=0;i<19;i++){
@@ -313,6 +356,9 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		};
 		WApplication.sp_result.set("final_result", final_result);
 		Nvram.writeFileByNamevec(data);
+		Intent intent = new Intent(mContext, CoreService.class);
+		stopService(intent);
+		mHandler.postDelayed(screenTask, 5000);
 		
 	}
 
@@ -348,22 +394,58 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 			String result = resultFilter(intent.getStringExtra("result"));
 			if (action.equals("custom.android.vibrator")) {
 				setStatus(6, status, result);
+				if(WApplication.sp.get("runin", 0)==11){
+					if(status.equals("done"))testComplete();
+				}
 			} else if (action.equals("custom.android.memory")) {
 				setStatus(1, status, result);
+				if(WApplication.sp.get("runin", 0)==11){
+					if(status.equals("done"))testComplete();
+				}
 			} else if (action.equals("custom.android.emmc")) {
 				setStatus(2, status, result);
+				if(WApplication.sp.get("runin", 0)==11){
+					if(status.equals("done"))testComplete();
+				}
 			} else if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
 				int level = intent.getIntExtra("level", 0);
 				int v=intent.getIntExtra("voltage", 0);
 				status = "testing";
 				result = "" + level + "%"+","+v+"v";
 				if (WApplication.sp.get("battery_s", true))
-					setStatus(4, status, result);
-				if (level == 100) {
-					if (WApplication.sp.get("full_battery_s", true))
-						setStatus(16, "done", "pass");
+				{
+					if(WApplication.sp_result.get(WApplication.SPRESULT_S[4], "none").equals("done")){
+						
+					}else{
+						setStatus(4, status, result);
+					}
+					
 				}
 				
+				//full battery
+				if (WApplication.sp.get("full_battery_s", true)){
+					status = "testing";
+					int plugged=intent.getIntExtra("plugged", 0);
+					if(plugged==1){
+						result="AC Charging";
+					}else if(plugged==2){
+						result="USB Charging";
+					}else{
+						result="not Charging";
+					}
+					if(!WApplication.sp_result.get(WApplication.SPRESULT_S[16], "none").equals("done")){
+						setStatus(16, status, result);
+						if (level == 100) {
+							setStatus(16, "done", "pass");
+							if(WApplication.sp.get("runin", 0)==11){
+								testComplete();
+							}
+						}
+					}
+					
+					
+				}
+		
 			}
 		}
 	}

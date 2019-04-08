@@ -68,6 +68,12 @@ public class GpsTest extends BaseActivity{
 				break;
 			case 4:
 				openGPS(true);
+				break;
+			case 5:
+				openGPS(false);
+				break;
+			case 6:
+				openGPS(true);
 				mHandler.postDelayed(new Runnable() {
 					
 					@Override
@@ -101,7 +107,7 @@ public class GpsTest extends BaseActivity{
 	        if(!open){ 
 	            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, android.provider.Settings.Secure.LOCATION_MODE_OFF); 
 	        }else{ 
-	            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, android.provider.Settings.Secure.LOCATION_MODE_BATTERY_SAVING); 
+	            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, android.provider.Settings.Secure.LOCATION_MODE_SENSORS_ONLY); 
 	        } 
 	    } 
 		}catch (Exception e) {
@@ -132,13 +138,21 @@ public class GpsTest extends BaseActivity{
 		Message gpsOn1=new Message();
 		gpsOn1.what=2;
 		mHandler.sendMessageDelayed(gpsOn1, 1000);
-		Message gpsOff=new Message();
-		gpsOff.what=3;
-		mHandler.sendMessageDelayed(gpsOff, 6000);
+		Message gpsOff1=new Message();
+		gpsOff1.what=3;
+		mHandler.sendMessageDelayed(gpsOff1, 6000);
 		
 		Message gpsOn2=new Message();
 		gpsOn2.what=4;
 		mHandler.sendMessageDelayed(gpsOn2, 11000);
+		
+		Message gpsOff2=new Message();
+		gpsOff2.what=5;
+		mHandler.sendMessageDelayed(gpsOff2, 16000);
+		
+		Message gpsOn3=new Message();
+		gpsOn3.what=6;
+		mHandler.sendMessageDelayed(gpsOn3, 21000);
 	}
 
 	

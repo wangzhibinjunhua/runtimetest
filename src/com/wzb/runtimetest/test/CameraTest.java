@@ -23,6 +23,8 @@ import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.SurfaceHolder;
@@ -41,7 +43,8 @@ public class CameraTest extends BaseActivity implements Callback {
 	Camera mCamera = null;
 	private String filepath = "";// 照片保存路径
 	private int cameraPosition = 1;// 0代表前置摄像头，1代表后置摄像头
-
+	private SoundPool soundPool;
+    private int soundId;
 	Timer mTimer;
 	int shutter_count=0;
 	@Override
@@ -55,6 +58,9 @@ public class CameraTest extends BaseActivity implements Callback {
 		holder = surfaceView.getHolder();
 		holder.addCallback(this);
 		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        // 加载声音资源
+        soundId = soundPool.load(this, R.raw.camera_click, 1);
 
 		mTimer = new Timer();
 		TimerTask task_back = new TimerTask() {
@@ -183,6 +189,7 @@ public class CameraTest extends BaseActivity implements Callback {
 			mHandler.sendEmptyMessage(9);
 			return;
 		}
+		soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
 		mCamera.autoFocus(new AutoFocusCallback() {//自动对焦
             @Override
             public void onAutoFocus(boolean success, Camera camera) {
