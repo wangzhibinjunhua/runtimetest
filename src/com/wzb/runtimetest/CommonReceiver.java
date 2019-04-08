@@ -50,6 +50,8 @@ public class CommonReceiver extends BroadcastReceiver {
 					PowerManager pManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 					pManager.reboot("reboot");
 				} else {
+					WApplication.sp_result.set(WApplication.SPRESULT_S[0], "done");
+					WApplication.sp_result.set(WApplication.SPRESULT_R[0], "pass");
 					gotoResultActivity(context);
 				}
 			}
