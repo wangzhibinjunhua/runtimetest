@@ -24,13 +24,13 @@ public class CommonReceiver extends BroadcastReceiver {
 		LogUtil.logMessage("wzb", "CommonReceiver:" + action);
 		if(action.equals("android.intent.action.PRE_BOOT_COMPLETED")){
 			//set ccflag property
-			if("1".equals(android.os.SystemProperties.get("ro.custom.set_detailmodel_tp",""))){
+			/*if("1".equals(android.os.SystemProperties.get("ro.custom.set_detailmodel_tp",""))){
 				if(Nvram.setDetailModel()==0){
 					LogUtil.logMessage("wzb", "CommonReceiver set ccflag property ok");
 				}else{
 					LogUtil.logMessage("wzb", "CommonReceiver set ccflag property err");
 				}
-			}
+			}*/
 			
 		}
 		else if (action.equals("android.provider.Telephony.SECRET_CODE")) {
@@ -55,7 +55,38 @@ public class CommonReceiver extends BroadcastReceiver {
 					gotoResultActivity(context);
 				}
 			}
-		}
+		}else if(action.equals("com.custom.set_roprop")){
+            // PropUtil.writeData("/vendor/protect_f/cust.prop", "ro.wzb","wzb");
+            //PropUtil.writeData("/vendor/protect_f/cust.prop", "ro.cust.hardware","mt8888");
+            //PropUtil.writeData("/vendor/protect_f/cust.prop", "ro.board.platform","test1111");
+			   String key=intent.getStringExtra("cust_key");
+			   String value=intent.getStringExtra("cust_value");
+			   if(key.length()==0 || key.length()>31 || value.length()>91){
+				   return;
+			   }
+			   if(!key.startsWith("ro.")){
+				   return;
+			   }
+			   if(key.equals("ro.hardware")){
+				   PropUtil.writeData("/vendor/protect_f/cust.prop", "ro.cust.hardware",value);
+			   }else{
+				   PropUtil.writeData("/vendor/protect_f/cust.prop", key,value);
+			   }
+       
+         }else if(action.equals("com.custom.del_roprop")){
+        	 String key=intent.getStringExtra("cust_key");
+        	 if(key.length()==0 || key.length()>31 ){
+				   return;
+			   }
+			   if(!key.startsWith("ro.")){
+				   return;
+			   }
+			   if(key.equals("ro.hardware")){
+				   PropUtil.removeData("/vendor/protect_f/cust.prop", "ro.cust.hardware");
+			   }else{
+				   PropUtil.removeData("/vendor/protect_f/cust.prop", key);
+			   }
+         }
 	}
 
 	private void gotoResultActivity(Context context) {
