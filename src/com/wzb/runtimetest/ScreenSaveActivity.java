@@ -8,7 +8,6 @@ import com.wzb.runtimetest.util.LogUtil;
 import android.app.usage.UsageEvents.Event;
 import android.os.Bundle;
 import android.os.Handler;
-
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -158,7 +157,6 @@ public class ScreenSaveActivity extends BaseActivity {
 		}
 		return super.onTouchEvent(event);
 	}
-	
 
 	@Override
 	protected void onDestroy() {
@@ -166,7 +164,5 @@ public class ScreenSaveActivity extends BaseActivity {
 		super.onDestroy();
 		mTimer.cancel();
 	}
-
-
 
 }

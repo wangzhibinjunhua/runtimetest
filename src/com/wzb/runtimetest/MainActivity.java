@@ -135,11 +135,20 @@ public class MainActivity extends Activity{
         ActivityManager am=(ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);  
         MemoryInfo mi=new MemoryInfo();  
         am.getMemoryInfo(mi);  
-        String[] available=fileSize(mi.availMem);  
-        String[] total=fileSize(mi.totalMem);  
-        tv_ram_size.setText(total[0]+total[1]);     
+       // String[] available=fileSize(mi.availMem);  
+        long total=mi.totalMem;  
+		String strTotal="";
+		if(total>1000){
+			total/=1000;
+			strTotal=total+" KB";
+			if(total>1000){
+				total/=1000;
+				strTotal=total+" MB";
+			}
+		}
+        tv_ram_size.setText(strTotal);     
     }  
-    /*显示ROM的可用和总容量，ROM相当于电脑的C盘*/  
+    
     private void showROMInfo(){  
         File file=Environment.getDataDirectory();   
         StatFs statFs=new StatFs(file.getPath());    
@@ -213,6 +222,10 @@ public class MainActivity extends Activity{
 			break;
 		case R.id.option_settings:
 			intent.setClass(MainActivity.this, SettingActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.option_report:
+			intent.setClass(MainActivity.this, TestReport.class);
 			startActivity(intent);
 			break;
 	

@@ -149,6 +149,8 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 		tv_quickcharge=(TextView)findViewById(R.id.setting_quickcharge);
 		tv_quickcharge.setClickable(true);
 		tv_quickcharge.setOnClickListener(this);
+		tv_quickcharge.setVisibility(View.GONE);
+			
 		
 		tv_screensave=(TextView)findViewById(R.id.setting_screensave);
 		tv_screensave.setClickable(true);

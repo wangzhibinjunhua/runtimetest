@@ -104,8 +104,8 @@ public class TestItemActivity extends BaseActivity implements OnScrollListener{
 		testItems.add(item);
 		item = new TestItemBean("Backlight",WApplication.sp.get("backlight_s", true));
 		testItems.add(item);
-		item = new TestItemBean("QuickCharge",WApplication.sp.get("quickcharge_s", true));
-		testItems.add(item);
+		//item = new TestItemBean("QuickCharge",WApplication.sp.get("quickcharge_s", true));
+		//testItems.add(item);
 		
 		itemAdapter=new ItemAdapter(testItems);
 	}
@@ -151,6 +151,7 @@ public class TestItemActivity extends BaseActivity implements OnScrollListener{
 			int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };// RGB颜色
 
 			convertView.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
+
 			return convertView;
 		}
 		

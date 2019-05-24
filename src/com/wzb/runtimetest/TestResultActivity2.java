@@ -80,7 +80,6 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		Intent intent = new Intent(mContext, CoreService.class);
 		startService(intent);
 		
-
 		Intent intent2 = new Intent(mContext, CoreIntentService.class);
 		intent2.putExtra("key", 2);
 		startService(intent2);
@@ -115,7 +114,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 
 	private void initAdapter() {
 		List<ResultItemBean> resultItems = new ArrayList<ResultItemBean>();
-		for (int i = 0; i < 19; i++) {
+		for (int i = 0; i < 18; i++) {
 			ResultItemBean items = new ResultItemBean(WApplication.ITEMNAME[i], getStatus(i), getResult(i));
 			resultItems.add(items);
 		}
@@ -280,14 +279,16 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 				}, 1000);
 			} else {
 				WApplication.sp.set("runin", 11);
-				testComplete();
+				
 			}
 		}
 		
-		if(nexttest==11){
+		if(WApplication.sp.get("runin", 0)==11){
 			int finalresult=WApplication.sp_result.get("final_result", 0);
 			if(finalresult==2 ||finalresult==3){
 				mHandler.postDelayed(screenTask, 5000);
+			}else{
+				testComplete();
 			}
 		}
 	}
@@ -341,10 +342,11 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		}
 		
 		int final_result=3;//pass
-		for(int i=0;i<19;i++){
+		for(int i=0;i<18;i++){
 			if(WApplication.sp_result.get(WApplication.SPRESULT_R[i], "").equals("fail")){
 				final_result=2; //fail
 			}
+			PropUtil.writeData("/cache/recovery/last_runtimetest.prop", WApplication.SPRESULT_R[i], WApplication.sp_result.get(WApplication.SPRESULT_R[i], "None"));
 		}
 		if(final_result==3){
 			tv_result.setText("Pass");
@@ -356,6 +358,9 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 		};
 		WApplication.sp_result.set("final_result", final_result);
 		Nvram.writeFileByNamevec(data);
+		
+		//write /vendor/protect_f/runtimetest.prop
+		PropUtil.writeData("/cache/recovery/last_runtimetest.prop", "final_result", ""+final_result);
 		Intent intent = new Intent(mContext, CoreService.class);
 		stopService(intent);
 		mHandler.postDelayed(screenTask, 5000);
@@ -364,7 +369,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 
 	private void updateData() {
 		LogUtil.logMessage("wzb", "updateData");
-		for (int i = 0; i < 19; i++) {
+		for (int i = 0; i < 18; i++) {
 			resultAdapter.getResultItem(i).setStatus(getStatus(i));
 			resultAdapter.getResultItem(i).setResult(getResult(i));
 			if (getResult(i).equals("pass")) {
@@ -441,6 +446,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 								testComplete();
 							}
 						}
+						
 					}
 					
 					
@@ -548,6 +554,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 			} else {
 				convertView.setBackgroundColor(Color.WHITE);
 			}
+
 			return convertView;
 		}
 
