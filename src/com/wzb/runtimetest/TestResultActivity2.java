@@ -326,9 +326,6 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 			}
 		}
 		
-		if (WApplication.sp.get("battery_s", true))
-			setStatus(4, "done", "pass");
-		
 		//check full battery "not Charging"
 		if (WApplication.sp.get("full_battery_s", true)){
 			if(!WApplication.sp_result.get(WApplication.SPRESULT_S[16], "none").equals("done")){
@@ -340,6 +337,14 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 			}
 			
 		}
+		
+		if (WApplication.sp.get("battery_s", true)){
+			
+			if(!WApplication.sp_result.get(WApplication.SPRESULT_S[4], "none").equals("done")){
+				return;
+			}
+		}
+			
 		
 		int final_result=3;//pass
 		for(int i=0;i<18;i++){
@@ -423,6 +428,27 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						
 					}else{
 						setStatus(4, status, result);
+						if (WApplication.sp.get("full_battery_s", true)){
+							if(WApplication.sp_result.get(WApplication.SPRESULT_S[16], "none").equals("done")){
+								if(level<=70 && level >=60){
+									setStatus(4, "done", "pass");
+									if(WApplication.sp.get("runin", 0)==11){
+										testComplete();
+									}
+								}
+							}
+						}else{
+							if(!android.os.SystemProperties.get("vendor.charge.runtimetest","").equals("1")){
+								android.os.SystemProperties.set("vendor.charge.runtimetest","1");
+							}
+							if(level<=70 && level >=60){
+								setStatus(4, "done", "pass");
+								if(WApplication.sp.get("runin", 0)==11){
+									testComplete();
+								}
+							}
+							
+						}
 					}
 					
 				}
@@ -442,6 +468,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 						setStatus(16, status, result);
 						if (level == 100) {
 							setStatus(16, "done", "pass");
+							android.os.SystemProperties.set("vendor.charge.runtimetest","1");
 							if(WApplication.sp.get("runin", 0)==11){
 								testComplete();
 							}
@@ -584,6 +611,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	}
 	
 	private void exit() {
+		android.os.SystemProperties.set("sys.charg.runtimetest","0");
 		Intent intent = new Intent(mContext, CoreService.class);
 		stopService(intent);
 		for (Activity activity : WApplication.activityList) {
