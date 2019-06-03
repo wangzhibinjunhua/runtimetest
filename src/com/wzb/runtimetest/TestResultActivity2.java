@@ -611,7 +611,7 @@ public class TestResultActivity2 extends BaseActivity implements OnScrollListene
 	}
 	
 	private void exit() {
-		android.os.SystemProperties.set("sys.charg.runtimetest","0");
+		android.os.SystemProperties.set("vendor.charge.runtimetest","0");
 		Intent intent = new Intent(mContext, CoreService.class);
 		stopService(intent);
 		for (Activity activity : WApplication.activityList) {
